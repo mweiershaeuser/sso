@@ -1,0 +1,93 @@
+services:
+  zitadel:
+    extends:
+      service: zitadel-init
+    restart: "always"
+    command: "start-from-setup --init-projections"
+    environment:
+      - ZITADEL_MASTERKEY=/run/secrets/zitadel_masterkey
+      - ZITADEL_EXTERNALPORT=443
+      - ZITADEL_EXTERNALSECURE=true
+      - ZITADEL_TLS_ENABLED=false
+    secrets:
+      - zitadel_masterkey
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.iam.rule=Host(`iam.melvinweiershaeuser.de`)
+      - traefik.http.services.zitadel.loadbalancer.server.scheme=h2c
+      - traefik.http.services.zitadel.loadbalancer.server.port=8080
+    networks:
+      - "zitadel"
+      - "traefik_net"
+    depends_on:
+      zitadel-init:
+        condition: "service_completed_successfully"
+      db:
+        condition: "service_healthy"
+
+  zitadel-init:
+    user: "$UID"
+    image: "ghcr.io/zitadel/zitadel:latest"
+    command: "init"
+    environment:
+      - ZITADEL_EXTERNALDOMAIN=iam.melvinweiershaeuser.de
+      - ZITADEL_LOGSTORE_ACCESS_STDOUT_ENABLED=true
+      - ZITADEL_DATABASE_POSTGRES_HOST=db
+      - ZITADEL_DATABASE_POSTGRES_PORT=5432
+      - ZITADEL_DATABASE_POSTGRES_DATABASE=zitadel
+      - ZITADEL_DATABASE_POSTGRES_USER_USERNAME=zitadel
+      - ZITADEL_DATABASE_POSTGRES_USER_PASSWORD=/run/secrets/db_user_pw
+      - ZITADEL_DATABASE_POSTGRES_USER_SSL_MODE=disable
+      - ZITADEL_DATABASE_POSTGRES_ADMIN_USERNAME=postgres
+      - ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD=/run/secrets/db_admin_pw
+      - ZITADEL_DATABASE_POSTGRES_ADMIN_SSL_MODE=disable
+    secrets:
+      - db_user_pw
+      - db_admin_pw
+    healthcheck:
+      test: ["CMD", "/app/zitadel", "ready"]
+      interval: "10s"
+      timeout: "5s"
+      retries: 5
+      start_period: "10s"
+    networks:
+      - "zitadel"
+    depends_on:
+      db:
+        condition: "service_healthy"
+
+  db:
+    restart: "always"
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_DB=zitadel
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=/run/secrets/db_admin_pw
+    volumes:
+      - "data:/var/lib/postgresql/data"
+    secrets:
+      - db_admin_pw
+    networks:
+      - "zitadel"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "zitadel", "-U", "postgres"]
+      interval: 5s
+      timeout: 60s
+      retries: 10
+      start_period: 5s
+
+volumes:
+  data:
+
+secrets:
+  zitadel_masterkey:
+    file: ./secrets/prod/zitadel_masterkey.txt
+  db_user_pw:
+    file: ./secrets/prod/db_user_pw.txt
+  db_admin_pw:
+    file: ./secrets/prod/db_admin_pw.txt
+
+networks:
+  zitadel:
+  traefik_net:
+    external: true
