@@ -1,21 +1,30 @@
 services:
   zitadel:
+    extends:
+      service: zitadel-init
     restart: "always"
-    image: "ghcr.io/zitadel/zitadel:latest"
-    command: 'start-from-init --masterkey "MasterkeyNeedsToHave32Characters" --tlsMode disabled'
-    environment:
-      - ZITADEL_EXTERNALSECURE=false
-      - ZITADEL_DATABASE_POSTGRES_HOST=db
-      - ZITADEL_DATABASE_POSTGRES_PORT=5432
-      - ZITADEL_DATABASE_POSTGRES_DATABASE=zitadel
-      - ZITADEL_DATABASE_POSTGRES_USER_USERNAME=zitadel
-      - ZITADEL_DATABASE_POSTGRES_USER_PASSWORD=zitadel
-      - ZITADEL_DATABASE_POSTGRES_USER_SSL_MODE=disable
-      - ZITADEL_DATABASE_POSTGRES_ADMIN_USERNAME=postgres
-      - ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD=postgres
-      - ZITADEL_DATABASE_POSTGRES_ADMIN_SSL_MODE=disable
+    command: "start-from-setup --init-projections --masterkeyFromEnv"
+    env_file: ./env/local/.env.zitadel
     ports:
       - "8080:8080"
+    networks:
+      - "zitadel"
+    depends_on:
+      zitadel-init:
+        condition: "service_completed_successfully"
+      db:
+        condition: "service_healthy"
+
+  zitadel-init:
+    image: "ghcr.io/zitadel/zitadel:latest"
+    command: "init"
+    env_file: ./env/local/.env.zitadel_init
+    healthcheck:
+      test: ["CMD", "/app/zitadel", "ready"]
+      interval: "10s"
+      timeout: "5s"
+      retries: 5
+      start_period: "10s"
     networks:
       - "zitadel"
     depends_on:
@@ -25,20 +34,17 @@ services:
   db:
     restart: "always"
     image: postgres:16-alpine
-    environment:
-      - POSTGRES_DB=zitadel
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+    env_file: ./env/local/.env.db
     volumes:
       - "data:/var/lib/postgresql/data"
     networks:
       - "zitadel"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready", "-d", "zitadel", "-U", "postgres"]
-      interval: "10s"
-      timeout: "30s"
-      retries: 5
-      start_period: "20s"
+      interval: 5s
+      timeout: 60s
+      retries: 10
+      start_period: 5s
 
 volumes:
   data:
