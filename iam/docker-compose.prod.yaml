@@ -8,8 +8,9 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.iam.rule=Host(`iam.melvinweiershaeuser.de`)
-      - traefik.http.services.zitadel.loadbalancer.server.scheme=h2c
-      - traefik.http.services.zitadel.loadbalancer.server.port=8080
+      - traefik.http.services.iam.loadbalancer.server.scheme=h2c
+      - traefik.http.services.iam.loadbalancer.passHostHeader=true
+      - traefik.http.services.iam.loadbalancer.server.port=8080
     networks:
       - "zitadel"
       - "traefik_net"
@@ -20,7 +21,6 @@ services:
         condition: "service_healthy"
 
   zitadel-init:
-    user: "$UID"
     image: "ghcr.io/zitadel/zitadel:latest"
     command: "init"
     env_file: ./env/prod/.env.zitadel_init
