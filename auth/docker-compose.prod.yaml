@@ -1,0 +1,16 @@
+services:
+  auth:
+    build:
+      context: .
+      args:
+        - ENV=production
+    restart: "always"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.auth.rule=Host(`auth.melvinweiershaeuser.de`)
+    networks:
+      - "traefik_net"
+
+networks:
+  traefik_net:
+    external: true
