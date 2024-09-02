@@ -2,14 +2,14 @@ import { login } from "./actions";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <h1 className="mb-2">Auth</h1>
+    <div className="p-4">
+      <h1>Login</h1>
       <form action={login} className="flex flex-col">
-        <label className="input mb-2">
+        <label className="input">
           <input type="text" name="user" placeholder="Benutzername" required />
         </label>
 
-        <label className="input mb-2">
+        <label className="input">
           <input
             type="password"
             name="password"
@@ -25,6 +25,6 @@ export default function Home() {
           value="Anmelden"
         />
       </form>
-    </main>
+    </div>
   );
 }
