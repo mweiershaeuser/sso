@@ -1,0 +1,16 @@
+export default function Footer() {
+  return (
+    <footer className="footer rounded-lg m-4 p-4 w-auto flex justify-center bg-base-300 text-base-content">
+      <span className="inline">
+        Copyright © {new Date().getFullYear()} - made with ❤ by{" "}
+        <a
+          href="https://github.com/mweiershaeuser"
+          target="_blank"
+          className="hover:underline"
+        >
+          Melvin Weiershäuser
+        </a>
+      </span>
+    </footer>
+  );
+}
