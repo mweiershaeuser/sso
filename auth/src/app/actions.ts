@@ -8,7 +8,7 @@ export async function login(formData: FormData) {
   const user = formData.get("user");
   const password = formData.get("password");
 
-  const response = await fetch(`${process.env.ZITADEL_HOST}/v2beta/sessions`, {
+  const response = await fetch(`${process.env.ZITADEL_HOST}/v2/sessions`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${process.env.ZITADEL_ACCESS_TOKEN}`,

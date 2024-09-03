@@ -21,7 +21,7 @@ services:
         condition: "service_healthy"
 
   zitadel-init:
-    image: "ghcr.io/zitadel/zitadel:latest"
+    image: "ghcr.io/zitadel/zitadel:v2.60.0"
     command: "init"
     env_file: ./env/prod/.env.zitadel_init
     healthcheck:
