@@ -1,4 +1,5 @@
-import { login } from "./actions";
+import AuthState from "./_components/auth-state";
+import { getUserInfo, login } from "./actions";
 
 export default function Home() {
   return (
@@ -25,6 +26,17 @@ export default function Home() {
           value="Anmelden"
         />
       </form>
+
+      <form action={getUserInfo} className="flex flex-col mt-4">
+        <input
+          type="submit"
+          role="button"
+          className="btn btn-primary"
+          value="User laden"
+        />
+      </form>
+
+      <AuthState />
     </div>
   );
 }
