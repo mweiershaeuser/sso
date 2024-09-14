@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AuthButton from "./auth-button";
+import AuthWrapper from "./auth-wrapper";
 
 export default function Header() {
   return (
@@ -11,7 +11,7 @@ export default function Header() {
       </div>
       <div className="navbar-center"></div>
       <div className="navbar-end">
-        <AuthButton />
+        <AuthWrapper />
       </div>
     </div>
   );

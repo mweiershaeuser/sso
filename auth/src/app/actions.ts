@@ -1,11 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-
-export interface UserSession {
-  sessionId: string;
-  sessionToken: string;
-}
+import { UserSession } from "./_models/user-session";
 
 export interface User {
   id: string;
