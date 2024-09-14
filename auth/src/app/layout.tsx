@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import Footer from "./_components/footer";
 import Header from "./_components/header";
+import StoreProvider from "./_contexts/store-provider";
 import "./globals.css";
 
 const open_sans = Open_Sans({ subsets: ["latin"] });
@@ -21,11 +22,13 @@ export default function RootLayout({
       <body
         className={`min-h-screen flex flex-col justify-between ${open_sans.className}`}
       >
-        <div>
-          <Header />
-          <main className="prose">{children}</main>
-        </div>
-        <Footer />
+        <StoreProvider>
+          <div>
+            <Header />
+            <main className="prose">{children}</main>
+          </div>
+          <Footer />
+        </StoreProvider>
       </body>
     </html>
   );
