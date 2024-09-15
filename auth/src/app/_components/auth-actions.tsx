@@ -1,30 +1,54 @@
 "use client";
 
-import { login, logout, selectAuth } from "@/store/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
-import { useEffect } from "react";
-import { UserSession } from "../_models/user-session";
+import AuthState from "@/auth/models/auth-state";
+import { User } from "@/auth/models/user";
+import { deleteSession } from "@/auth/server-actions";
+import { setAuthState } from "@/store/auth/authSlice";
+import { useAppDispatch } from "@/store/hooks";
+import { setUser } from "@/store/user/userSlice";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect } from "react";
 
-export default function AuthActions({ cookies }: { cookies: RequestCookie[] }) {
-  const loggedIn = useAppSelector(selectAuth);
+export default function AuthActions({
+  authState,
+  user,
+}: {
+  authState: AuthState;
+  user: User;
+}) {
+  const router = useRouter();
   const dispatch = useAppDispatch();
 
+  const { loggedIn } = authState;
+
   useEffect(() => {
-    const sessionCookie = cookies.find((c) => c.name === "session");
-    const session = sessionCookie
-      ? (JSON.parse(sessionCookie.value) as UserSession)
-      : undefined;
-    if (session) {
-      dispatch(login());
+    dispatch(setAuthState(authState));
+    dispatch(setUser(user));
+  }, [authState, dispatch, user]);
+
+  const loginOrLogout = useCallback(() => {
+    if (!loggedIn) {
+      router.push("/login");
     } else {
-      dispatch(logout());
+      deleteSession();
     }
-  }, [cookies, dispatch]);
+  }, [loggedIn, router]);
 
   return (
-    <button className="btn btn-primary">
-      {!loggedIn ? "Login" : "Logout"}
-    </button>
+    <>
+      <button className="btn btn-primary" onClick={loginOrLogout}>
+        {!loggedIn ? "Login" : "Logout"}
+      </button>
+      {loggedIn && (
+        <div className="avatar placeholder ml-2">
+          <div className="bg-neutral text-neutral-content w-12 rounded-full">
+            <span className="text-lg">
+              {user.givenName[0]?.toUpperCase()}
+              {user.familyName[0]?.toUpperCase()}
+            </span>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

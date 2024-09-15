@@ -1,13 +1,13 @@
-import { cookies } from "next/headers";
+import { getAuthState, getUser } from "@/auth/server-operations";
 import AuthActions from "./auth-actions";
 
-export default function AuthWrapper() {
-  const cookieStore = cookies();
-  const allCookies = cookieStore.getAll();
+export default async function AuthWrapper() {
+  const authState = await getAuthState();
+  const user = await getUser();
 
   return (
     <>
-      <AuthActions cookies={allCookies} />
+      <AuthActions authState={authState} user={user} />
     </>
   );
 }
