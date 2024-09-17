@@ -79,8 +79,7 @@ export async function getAuthState() {
 }
 
 export async function getUserFromSession(session?: Session): Promise<User> {
-  const authState = await getAuthStateFromSession(session);
-  if (!session || !(authState.sessionCreated && authState.loggedIn)) {
+  if (!session) {
     return {
       id: "",
       username: "",
@@ -89,15 +88,22 @@ export async function getUserFromSession(session?: Session): Promise<User> {
       email: "",
     };
   }
+  const authState = await getAuthStateFromSession(session);
+  const sessionCreatedButNotAuthenticated = !(
+    authState.sessionCreated && authState.loggedIn
+  );
+
   const sessionInfo = await getSessionInfo(session);
   const userInfo = await getUserInfo(sessionInfo.session.factors.user.id);
 
   return {
-    id: userInfo.user.userId,
+    id: sessionCreatedButNotAuthenticated ? "" : userInfo.user.userId,
     username: userInfo.user.username,
     givenName: userInfo.user.human.profile.givenName,
     familyName: userInfo.user.human.profile.familyName,
-    email: userInfo.user.human.email.email,
+    email: sessionCreatedButNotAuthenticated
+      ? ""
+      : userInfo.user.human.email.email,
   };
 }
 

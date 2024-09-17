@@ -4,6 +4,7 @@ import { selectAuth } from "@/store/auth/authSlice";
 import { useAppSelector } from "@/store/hooks";
 import { useRouter } from "next/navigation";
 import AuthFactorsForm from "./_components/auth-factors-form";
+import UsernameDisplay from "./_components/username-display";
 import UsernameForm from "./_components/username-form";
 
 export default function Login() {
@@ -18,7 +19,12 @@ export default function Login() {
     <div className="p-4">
       <h1>Login</h1>
       {!sessionCreated && !loggedIn && <UsernameForm />}
-      {sessionCreated && !loggedIn && <AuthFactorsForm />}
+      {sessionCreated && !loggedIn && (
+        <>
+          <UsernameDisplay />
+          <AuthFactorsForm />
+        </>
+      )}
     </div>
   );
 }
