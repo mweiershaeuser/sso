@@ -1,30 +1,18 @@
-"use client";
+import { getAuthState } from "@/auth/server-operations";
+import { redirect } from "next/navigation";
+import LoginForm from "./_components/login-form";
 
-import { selectAuth } from "@/store/auth/authSlice";
-import { useAppSelector } from "@/store/hooks";
-import { useRouter } from "next/navigation";
-import AuthFactorsForm from "./_components/auth-factors-form";
-import UsernameDisplay from "./_components/username-display";
-import UsernameForm from "./_components/username-form";
+export default async function Login() {
+  const { loggedIn } = await getAuthState();
 
-export default function Login() {
-  const router = useRouter();
-  const { sessionCreated, loggedIn } = useAppSelector(selectAuth);
-
-  if (sessionCreated && loggedIn) {
-    router.push("/account");
+  if (loggedIn) {
+    redirect("/account");
   }
 
   return (
     <div className="p-4">
       <h1>Login</h1>
-      {!sessionCreated && !loggedIn && <UsernameForm />}
-      {sessionCreated && !loggedIn && (
-        <>
-          <UsernameDisplay />
-          <AuthFactorsForm />
-        </>
-      )}
+      <LoginForm />
     </div>
   );
 }

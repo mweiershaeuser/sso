@@ -1,4 +1,6 @@
 import AuthState from "@/auth/models/auth-state";
+import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
+import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 import { cookies } from "next/headers";
 import {
   getAvailableAuthMethods,
@@ -12,10 +14,10 @@ import {
 import Session from "./models/session";
 import { User } from "./models/user";
 
-export function getSessionFromCookie(): Session | undefined {
-  const cookieStore = cookies();
-
-  const sessionCookie = cookieStore.get("session");
+export function getSession(
+  cookies: Pick<ReadonlyRequestCookies | RequestCookies, "get">,
+): Session | undefined {
+  const sessionCookie = cookies.get("session");
 
   if (!sessionCookie || !sessionCookie.value) {
     return undefined;
@@ -39,6 +41,11 @@ export function getSessionFromCookie(): Session | undefined {
     };
   }
   return undefined;
+}
+
+export function getSessionFromCookie(): Session | undefined {
+  const cookieStore = cookies();
+  return getSession(cookieStore);
 }
 
 export async function getAuthStateFromSession(session?: Session) {
