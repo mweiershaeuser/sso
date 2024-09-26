@@ -1,8 +1,10 @@
 import { createSession } from "@/auth/server-actions";
+import { useFormState } from "react-dom";
 
 export default function UsernameForm() {
+  const [state, formAction] = useFormState(createSession, undefined);
   return (
-    <form action={createSession} className="flex flex-col">
+    <form action={formAction} className="flex flex-col">
       <label className="form-control mb-3">
         <div className="label">
           <span className="label-text">Benutzername</span>
