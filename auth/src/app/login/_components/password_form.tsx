@@ -10,11 +10,10 @@ export default function PasswordForm() {
   return (
     <form action={authenticateWithPassword} className="flex flex-col">
       <input
-        type="text"
+        type="hidden"
         name="user"
-        className="hidden"
         value={username}
-        aria-hidden="true"
+        autoComplete="username"
       />
 
       <label className="form-control mb-3">

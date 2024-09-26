@@ -7,7 +7,12 @@ export default function UsernameForm() {
         <div className="label">
           <span className="label-text">Benutzername</span>
         </div>
-        <input type="text" name="user" className="input input-bordered" />
+        <input
+          type="text"
+          name="user"
+          className="input input-bordered"
+          autoComplete="username"
+        />
       </label>
 
       <div className="form-control mb-3">
