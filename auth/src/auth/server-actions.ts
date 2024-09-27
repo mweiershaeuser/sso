@@ -15,6 +15,13 @@ export async function createSession(
   const user = formData.get("user");
   const stayLoggedIn = formData.get("stayLoggedIn") === "on";
 
+  if (!user || user.toString().length < 1) {
+    return {
+      type: "error",
+      errors: { user: "Bitte Benutzernamen eingeben!" },
+    };
+  }
+
   try {
     const response = await fetch(`${process.env.ZITADEL_HOST}/v2/sessions`, {
       method: "POST",
