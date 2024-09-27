@@ -61,14 +61,17 @@ export async function getAuthStateFromSession(
     return {
       type: "error",
       message: "Es wurde keine Session gefunden.",
+      data: authState,
     };
   }
 
-  authState.sessionCreated = true;
-
   const sessionInfoResponse = await getSessionInfo(session);
   if (sessionInfoResponse.type === "error" || !sessionInfoResponse.data) {
-    return { type: "error", message: sessionInfoResponse.message };
+    return {
+      type: "error",
+      message: sessionInfoResponse.message,
+      data: authState,
+    };
   }
 
   const availableAuthMethodsResponse = await getAvailableAuthMethods(
@@ -78,8 +81,14 @@ export async function getAuthStateFromSession(
     availableAuthMethodsResponse.type === "error" ||
     !availableAuthMethodsResponse.data
   ) {
-    return { type: "error", message: availableAuthMethodsResponse.message };
+    return {
+      type: "error",
+      message: availableAuthMethodsResponse.message,
+      data: authState,
+    };
   }
+
+  authState.sessionCreated = true;
   authState.availableAuthFactors = {
     primary: getPrimaryAuthFactorsFromAuthMethods(
       availableAuthMethodsResponse.data,
@@ -108,29 +117,49 @@ export async function getAuthState() {
 export async function getUserFromSession(
   session?: Session,
 ): Promise<ServerResponse<User>> {
+  const emptyUser = {
+    id: "",
+    username: "",
+    givenName: "",
+    familyName: "",
+    email: "",
+  };
   if (!session) {
     return {
       type: "error",
       message: "Es wurde keine Session gefunden.",
+      data: emptyUser,
     };
   }
   const authStateResponse = await getAuthStateFromSession(session);
   if (authStateResponse.type === "error" || !authStateResponse.data) {
-    return { type: "error", message: authStateResponse.message };
+    return {
+      type: "error",
+      message: authStateResponse.message,
+      data: emptyUser,
+    };
   }
   const sessionCreatedButNotAuthenticated =
     authStateResponse.data.sessionCreated && !authStateResponse.data.loggedIn;
 
   const sessionInfoResponse = await getSessionInfo(session);
   if (sessionInfoResponse.type === "error" || !sessionInfoResponse.data) {
-    return { type: "error", message: sessionInfoResponse.message };
+    return {
+      type: "error",
+      message: sessionInfoResponse.message,
+      data: emptyUser,
+    };
   }
 
   const userInfoResponse = await getUserInfo(
     sessionInfoResponse.data.session.factors.user.id,
   );
   if (userInfoResponse.type === "error" || !userInfoResponse.data) {
-    return { type: "error", message: userInfoResponse.message };
+    return {
+      type: "error",
+      message: userInfoResponse.message,
+      data: emptyUser,
+    };
   }
 
   return {
