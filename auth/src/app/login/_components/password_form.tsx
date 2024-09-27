@@ -1,8 +1,23 @@
+"use client";
+
 import { authenticateWithPassword } from "@/auth/server-actions";
+import { useAppSelector } from "@/store/hooks";
+import { selectUser } from "@/store/user/userSlice";
+import { useFormState } from "react-dom";
 
 export default function PasswordForm() {
+  const { username } = useAppSelector(selectUser);
+  const [state, formAction] = useFormState(authenticateWithPassword, undefined);
+
   return (
-    <form action={authenticateWithPassword} className="flex flex-col">
+    <form action={formAction} className="flex flex-col">
+      <input
+        type="hidden"
+        name="user"
+        value={username}
+        autoComplete="username"
+      />
+
       <label className="form-control mb-3">
         <div className="label">
           <span className="label-text">Passwort</span>
@@ -11,6 +26,7 @@ export default function PasswordForm() {
           type="password"
           name="password"
           className="input input-bordered"
+          autoComplete="current-password"
         />
       </label>
 

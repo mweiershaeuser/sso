@@ -3,9 +3,9 @@ import { redirect } from "next/navigation";
 import LoginForm from "./_components/login-form";
 
 export default async function Login() {
-  const { loggedIn } = await getAuthState();
+  const authStateResponse = await getAuthState();
 
-  if (loggedIn) {
+  if (authStateResponse.data?.loggedIn) {
     redirect("/account");
   }
 

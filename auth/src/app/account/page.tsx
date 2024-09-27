@@ -2,9 +2,9 @@ import { getAuthState } from "@/auth/server-operations";
 import { redirect } from "next/navigation";
 
 export default async function Account() {
-  const authState = await getAuthState();
+  const authStateResponse = await getAuthState();
 
-  if (!authState.loggedIn) {
+  if (!authStateResponse.data?.loggedIn) {
     redirect("/login");
   }
 

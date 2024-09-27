@@ -13,38 +13,40 @@ export default function AuthActions({
   authState,
   user,
 }: {
-  authState: AuthState;
-  user: User;
+  authState?: AuthState;
+  user?: User;
 }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { loggedIn } = authState;
-
   useEffect(() => {
-    dispatch(setAuthState(authState));
-    dispatch(setUser(user));
+    if (authState) {
+      dispatch(setAuthState(authState));
+    }
+    if (user) {
+      dispatch(setUser(user));
+    }
   }, [authState, dispatch, user]);
 
   const loginOrLogout = useCallback(() => {
-    if (!loggedIn) {
+    if (!authState?.loggedIn) {
       router.push("/login");
     } else {
       deleteSession();
     }
-  }, [loggedIn, router]);
+  }, [authState?.loggedIn, router]);
 
   return (
     <>
       <button className="btn btn-primary" onClick={loginOrLogout}>
-        {!loggedIn ? "Login" : "Logout"}
+        {!authState?.loggedIn ? "Login" : "Logout"}
       </button>
-      {loggedIn && (
+      {authState?.loggedIn && (
         <div className="avatar placeholder ml-2">
           <div className="bg-neutral text-neutral-content w-12 rounded-full">
             <span className="text-lg">
-              {user.givenName[0]?.toUpperCase()}
-              {user.familyName[0]?.toUpperCase()}
+              {user?.givenName[0]?.toUpperCase()}
+              {user?.familyName[0]?.toUpperCase()}
             </span>
           </div>
         </div>

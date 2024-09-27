@@ -30,7 +30,7 @@ const authMethodToPrimaryAuthFactorMap = new Map<AuthMethod, PrimaryAuthFactor>(
 const authMethodToSecondaryAuthFactorMap = new Map<
   AuthMethod,
   SecondaryAuthFactor
->([[AuthMethod.AUTHENTICATION_METHOD_TYPE_PASSWORD, SecondaryAuthFactor.TOTP]]);
+>([[AuthMethod.AUTHENTICATION_METHOD_TYPE_TOTP, SecondaryAuthFactor.TOTP]]);
 
 export function getPrimaryAuthFactorsFromAuthMethods(
   authMethods: AuthMethod[],
