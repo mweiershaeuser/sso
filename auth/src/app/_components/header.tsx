@@ -3,7 +3,7 @@ import AuthWrapper from "./auth-wrapper";
 
 export default function Header() {
   return (
-    <div className="navbar m-4 w-auto rounded-lg bg-base-300">
+    <div className="navbar w-full rounded-lg bg-base-300">
       <div className="navbar-start">
         <Link href="/" className="btn btn-ghost text-xl">
           auth

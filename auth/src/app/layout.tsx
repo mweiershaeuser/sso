@@ -19,15 +19,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body
-        className={`min-h-screen flex flex-col justify-between ${open_sans.className}`}
-      >
+      <body className={`min-h-screen flex flex-col ${open_sans.className}`}>
         <StoreProvider>
-          <div>
+          <div className="w-full p-4">
             <Header />
-            <main className="prose">{children}</main>
           </div>
-          <Footer />
+          <main className="grow flex flex-col min-w-full max-w-full prose">
+            {children}
+          </main>
+          <div className="w-full p-4">
+            <Footer />
+          </div>
         </StoreProvider>
       </body>
     </html>

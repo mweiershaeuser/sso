@@ -7,7 +7,7 @@ import { selectUser } from "@/store/user/userSlice";
 export default function UsernameDisplay() {
   const { username, givenName, familyName } = useAppSelector(selectUser);
   return (
-    <div className="flex items-center justify-between bg-base-300 rounded-lg shadow p-4">
+    <div className="flex items-center justify-between bg-base-100 rounded-lg shadow p-4">
       <div className="flex items-center gap-5">
         <div className="avatar placeholder">
           <div className="bg-neutral text-neutral-content w-12 h-12 rounded-full">
@@ -27,7 +27,11 @@ export default function UsernameDisplay() {
           className="btn btn-circle btn-outline"
           onClick={() => deleteSession()}
         >
-          <i className="bi bi-x-lg"></i>
+          <i
+            className="bi bi-x-lg"
+            aria-label="Benutzer:in ändern"
+            role="img"
+          ></i>
         </button>
       </div>
     </div>
