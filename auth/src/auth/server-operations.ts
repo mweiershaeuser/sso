@@ -11,6 +11,7 @@ import {
   getPrimaryAuthFactorsFromAuthMethods,
   getSecondaryAuthFactorsFromAuthMethods,
 } from "./models/auth-factors";
+import { ServerResponse } from "./models/server-response";
 import Session from "./models/session";
 import { User } from "./models/user";
 
@@ -48,36 +49,55 @@ export function getSessionFromCookie(): Session | undefined {
   return getSession(cookieStore);
 }
 
-export async function getAuthStateFromSession(session?: Session) {
+export async function getAuthStateFromSession(
+  session?: Session,
+): Promise<ServerResponse<AuthState>> {
   const authState: AuthState = {
     sessionCreated: false,
     availableAuthFactors: { primary: [], secondary: [] },
     loggedIn: false,
   };
   if (!session) {
-    return authState;
+    return {
+      type: "error",
+      message: "Es wurde keine Session gefunden.",
+    };
   }
 
   authState.sessionCreated = true;
-  const sessionInfo = await getSessionInfo(session);
 
-  const availableAuthMethods = await getAvailableAuthMethods(
-    sessionInfo.session.factors.user.id,
+  const sessionInfoResponse = await getSessionInfo(session);
+  if (sessionInfoResponse.type === "error" || !sessionInfoResponse.data) {
+    return { type: "error", message: sessionInfoResponse.message };
+  }
+
+  const availableAuthMethodsResponse = await getAvailableAuthMethods(
+    sessionInfoResponse.data.session.factors.user.id,
   );
+  if (
+    availableAuthMethodsResponse.type === "error" ||
+    !availableAuthMethodsResponse.data
+  ) {
+    return { type: "error", message: availableAuthMethodsResponse.message };
+  }
   authState.availableAuthFactors = {
-    primary: getPrimaryAuthFactorsFromAuthMethods(availableAuthMethods),
-    secondary: getSecondaryAuthFactorsFromAuthMethods(availableAuthMethods),
+    primary: getPrimaryAuthFactorsFromAuthMethods(
+      availableAuthMethodsResponse.data,
+    ),
+    secondary: getSecondaryAuthFactorsFromAuthMethods(
+      availableAuthMethodsResponse.data,
+    ),
   };
 
   if (
-    sessionInfo.session.factors.webAuthN ||
-    sessionInfo.session.factors.password
-    /* (sessionInfo.session.factors.password  && sessionInfo.session.factors.totp) */
+    sessionInfoResponse.data.session.factors.webAuthN ||
+    sessionInfoResponse.data.session.factors.password
+    /* (sessionInfoResponse.data.session.factors.password  && sessionInfoResponse.data.session.factors.totp) */
   ) {
     authState.loggedIn = true;
   }
 
-  return authState;
+  return { type: "success", data: authState };
 }
 
 export async function getAuthState() {
@@ -85,32 +105,47 @@ export async function getAuthState() {
   return getAuthStateFromSession(session);
 }
 
-export async function getUserFromSession(session?: Session): Promise<User> {
+export async function getUserFromSession(
+  session?: Session,
+): Promise<ServerResponse<User>> {
   if (!session) {
     return {
-      id: "",
-      username: "",
-      givenName: "",
-      familyName: "",
-      email: "",
+      type: "error",
+      message: "Es wurde keine Session gefunden.",
     };
   }
-  const authState = await getAuthStateFromSession(session);
-  const sessionCreatedButNotAuthenticated = !(
-    authState.sessionCreated && authState.loggedIn
-  );
+  const authStateResponse = await getAuthStateFromSession(session);
+  if (authStateResponse.type === "error" || !authStateResponse.data) {
+    return { type: "error", message: authStateResponse.message };
+  }
+  const sessionCreatedButNotAuthenticated =
+    authStateResponse.data.sessionCreated && !authStateResponse.data.loggedIn;
 
-  const sessionInfo = await getSessionInfo(session);
-  const userInfo = await getUserInfo(sessionInfo.session.factors.user.id);
+  const sessionInfoResponse = await getSessionInfo(session);
+  if (sessionInfoResponse.type === "error" || !sessionInfoResponse.data) {
+    return { type: "error", message: sessionInfoResponse.message };
+  }
+
+  const userInfoResponse = await getUserInfo(
+    sessionInfoResponse.data.session.factors.user.id,
+  );
+  if (userInfoResponse.type === "error" || !userInfoResponse.data) {
+    return { type: "error", message: userInfoResponse.message };
+  }
 
   return {
-    id: sessionCreatedButNotAuthenticated ? "" : userInfo.user.userId,
-    username: userInfo.user.username,
-    givenName: userInfo.user.human.profile.givenName,
-    familyName: userInfo.user.human.profile.familyName,
-    email: sessionCreatedButNotAuthenticated
-      ? ""
-      : userInfo.user.human.email.email,
+    type: "success",
+    data: {
+      id: sessionCreatedButNotAuthenticated
+        ? ""
+        : userInfoResponse.data.user.userId,
+      username: userInfoResponse.data.user.username,
+      givenName: userInfoResponse.data.user.human.profile.givenName,
+      familyName: userInfoResponse.data.user.human.profile.familyName,
+      email: sessionCreatedButNotAuthenticated
+        ? ""
+        : userInfoResponse.data.user.human.email.email,
+    },
   };
 }
 

@@ -4,20 +4,20 @@ import { NextRequest, NextResponse } from "next/server";
 function getAuthStateFromRequest(request: NextRequest) {
   const cookies = request.cookies;
   const session = getSession(cookies);
-  const authState = getAuthStateFromSession(session);
-  return authState;
+  const authStateResponse = getAuthStateFromSession(session);
+  return authStateResponse;
 }
 
 const protectedRoute = async (request: NextRequest) => {
-  const authState = await getAuthStateFromRequest(request);
-  if (!authState.loggedIn) {
+  const authStateResponse = await getAuthStateFromRequest(request);
+  if (!authStateResponse.data?.loggedIn) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
 };
 
 const loginOrSignUpRoute = async (request: NextRequest) => {
-  const authState = await getAuthStateFromRequest(request);
-  if (authState.loggedIn) {
+  const authStateResponse = await getAuthStateFromRequest(request);
+  if (authStateResponse.data?.loggedIn) {
     return NextResponse.redirect(new URL("/account", request.nextUrl));
   }
 };

@@ -47,14 +47,20 @@ export async function createSession(
     const { sessionId, sessionToken }: Session = await response.json();
     const session: Session = { sessionId, sessionToken, stayLoggedIn };
 
-    const sessionInfo = await getSessionInfo(session);
+    const sessionInfoResponse = await getSessionInfo(session);
+
+    if (sessionInfoResponse.type === "error" || !sessionInfoResponse.data) {
+      return sessionInfoResponse;
+    }
 
     cookieStore.set(`session`, JSON.stringify(session), {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       ...(session.stayLoggedIn
-        ? { expires: new Date(sessionInfo.session.expirationDate) }
+        ? {
+            expires: new Date(sessionInfoResponse.data.session.expirationDate),
+          }
         : {}),
     });
 
@@ -120,14 +126,18 @@ export async function authenticateWithPassword(
     const updatedSession: { sessionToken: string } = await response.json();
     session.sessionToken = updatedSession.sessionToken;
 
-    const sessionInfo = await getSessionInfo(session);
+    const sessionInfoResponse = await getSessionInfo(session);
+
+    if (sessionInfoResponse.type === "error" || !sessionInfoResponse.data) {
+      return sessionInfoResponse;
+    }
 
     cookieStore.set(`session`, JSON.stringify(session), {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       ...(session.stayLoggedIn
-        ? { expires: new Date(sessionInfo.session.expirationDate) }
+        ? { expires: new Date(sessionInfoResponse.data.session.expirationDate) }
         : {}),
     });
 
