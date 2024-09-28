@@ -1,6 +1,7 @@
 "use client";
 
 import AuthState from "@/auth/models/auth-state";
+import { ServerResponse } from "@/auth/models/server-response";
 import { User } from "@/auth/models/user";
 import { deleteSession } from "@/auth/server-actions";
 import { setAuthState } from "@/store/auth/authSlice";
@@ -8,16 +9,24 @@ import { useAppDispatch } from "@/store/hooks";
 import { setUser } from "@/store/user/userSlice";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
+import toast from "react-hot-toast";
 
 export default function AuthActions({
-  authState,
-  user,
+  authStateResponse,
+  userResponse,
 }: {
-  authState?: AuthState;
-  user?: User;
+  authStateResponse: ServerResponse<AuthState>;
+  userResponse: ServerResponse<User>;
 }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
+
+  const {
+    type: authStateSuccess,
+    data: authState,
+    message: authStateError,
+  } = authStateResponse;
+  const { type: userSuccess, data: user, message: userError } = userResponse;
 
   useEffect(() => {
     if (authState) {
@@ -27,6 +36,15 @@ export default function AuthActions({
       dispatch(setUser(user));
     }
   }, [authState, dispatch, user]);
+
+  useEffect(() => {
+    if (authStateSuccess === "error") {
+      toast.error(authStateError ?? "Es ist ein Fehler aufgetreten.");
+    }
+    if (userSuccess === "error" && authStateSuccess !== "error") {
+      toast.error(userError ?? "Es ist ein Fehler aufgetreten.");
+    }
+  }, [authStateError, authStateSuccess, userError, userSuccess]);
 
   const loginOrLogout = useCallback(() => {
     if (!authState?.loggedIn) {

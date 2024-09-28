@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MuseoModerno, Open_Sans } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import Footer from "./_components/footer";
 import Header from "./_components/header";
 import StoreProvider from "./_contexts/store-provider";
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`min-h-screen flex flex-col ${museo_moderno.variable} ${open_sans.variable} font-sans`}
       >
         <StoreProvider>
+          <Toaster />
           <div className="w-full p-4">
             <Header />
           </div>

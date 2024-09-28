@@ -59,8 +59,7 @@ export async function getAuthStateFromSession(
   };
   if (!session) {
     return {
-      type: "error",
-      message: "Es wurde keine Session gefunden.",
+      type: "success",
       data: authState,
     };
   }
@@ -126,8 +125,7 @@ export async function getUserFromSession(
   };
   if (!session) {
     return {
-      type: "error",
-      message: "Es wurde keine Session gefunden.",
+      type: "success",
       data: emptyUser,
     };
   }

@@ -8,8 +8,8 @@ export default async function AuthWrapper() {
   return (
     <>
       <AuthActions
-        authState={authStateResponse.data}
-        user={userResponse.data}
+        authStateResponse={authStateResponse}
+        userResponse={userResponse}
       />
     </>
   );
