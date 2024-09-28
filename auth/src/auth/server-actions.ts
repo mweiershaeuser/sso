@@ -98,6 +98,13 @@ export async function authenticateWithPassword(
 
   const password = formData.get("password");
 
+  if (!password || password.toString().length < 1) {
+    return {
+      type: "error",
+      errors: { password: "Bitte Passwort eingeben!" },
+    };
+  }
+
   try {
     const response = await fetch(
       `${process.env.ZITADEL_HOST}/v2/sessions/${session.sessionId}`,

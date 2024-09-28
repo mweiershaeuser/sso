@@ -1,9 +1,14 @@
 import { ServerResponse } from "@/auth/models/server-response";
-import { HTMLInputAutoCompleteAttribute, RefObject } from "react";
+import {
+  HTMLInputAutoCompleteAttribute,
+  HTMLInputTypeAttribute,
+  RefObject,
+} from "react";
 
 export function TextInput({
   name,
   label,
+  type = "text",
   required = false,
   autocomplete,
   formState,
@@ -11,6 +16,7 @@ export function TextInput({
 }: {
   name: string;
   label: string;
+  type?: Extract<HTMLInputTypeAttribute, "text" | "password">;
   required?: boolean;
   autocomplete?: HTMLInputAutoCompleteAttribute;
   formState?: ServerResponse;
@@ -28,7 +34,7 @@ export function TextInput({
           </span>
         </div>
         <input
-          type="text"
+          type={type}
           name={name}
           ref={inputRef}
           className={`input input-bordered ${formState?.errors?.[name] && "input-error"}`}
