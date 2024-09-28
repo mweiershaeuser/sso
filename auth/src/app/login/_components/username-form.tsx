@@ -2,6 +2,7 @@ import { createSession } from "@/auth/server-actions";
 import { TextInput } from "@/components/form/text-input";
 import { useEffect, useRef } from "react";
 import { useFormState } from "react-dom";
+import toast from "react-hot-toast";
 
 export default function UsernameForm() {
   const [state, formAction] = useFormState(createSession, undefined);
@@ -10,6 +11,9 @@ export default function UsernameForm() {
   useEffect(() => {
     if (state?.errors?.user) {
       userRef.current?.focus();
+    }
+    if (state?.type === "error" && state?.message) {
+      toast.error(state.message);
     }
   }, [state]);
 

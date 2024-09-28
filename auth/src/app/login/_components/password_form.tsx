@@ -6,6 +6,7 @@ import { useAppSelector } from "@/store/hooks";
 import { selectUser } from "@/store/user/userSlice";
 import { useEffect, useRef } from "react";
 import { useFormState } from "react-dom";
+import toast from "react-hot-toast";
 
 export default function PasswordForm() {
   const { username } = useAppSelector(selectUser);
@@ -16,6 +17,9 @@ export default function PasswordForm() {
   useEffect(() => {
     if (state?.errors?.password) {
       passwordRef.current?.focus();
+    }
+    if (state?.type === "error" && state?.message) {
+      toast.error(state.message);
     }
   }, [state]);
 

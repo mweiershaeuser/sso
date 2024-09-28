@@ -32,7 +32,7 @@ export default function RootLayout({
         className={`min-h-screen flex flex-col ${museo_moderno.variable} ${open_sans.variable} font-sans`}
       >
         <StoreProvider>
-          <Toaster />
+          <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
           <div className="w-full p-4">
             <Header />
           </div>
