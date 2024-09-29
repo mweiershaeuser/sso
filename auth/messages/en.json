@@ -1,0 +1,10 @@
+{
+  "RootLayout": {
+    "Header": {
+      "Auth": {
+        "login-button-text": "Login",
+        "logout-button-text": "Logout"
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@ import { deleteSession } from "@/auth/server-actions";
 import { setAuthState } from "@/store/auth/authSlice";
 import { useAppDispatch } from "@/store/hooks";
 import { setUser } from "@/store/user/userSlice";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -20,6 +21,7 @@ export default function AuthActions({
 }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const t = useTranslations("RootLayout.Header.Auth");
 
   const {
     type: authStateSuccess,
@@ -57,7 +59,9 @@ export default function AuthActions({
   return (
     <>
       <button className="btn btn-primary" onClick={loginOrLogout}>
-        {!authState?.loggedIn ? "Login" : "Logout"}
+        {!authState?.loggedIn
+          ? t("login-button-text")
+          : t("logout-button-text")}
       </button>
       {authState?.loggedIn && (
         <div className="avatar placeholder ml-2">

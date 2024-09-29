@@ -1,0 +1,10 @@
+{
+  "RootLayout": {
+    "Header": {
+      "Auth": {
+        "login-button-text": "Anmelden",
+        "logout-button-text": "Abmelden"
+      }
+    }
+  }
+}

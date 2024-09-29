@@ -1,5 +1,6 @@
 import Link from "next/link";
 import AuthWrapper from "./auth-wrapper";
+import LocaleSwitch from "./locale-switch";
 
 export default function Header() {
   return (
@@ -13,7 +14,8 @@ export default function Header() {
         </div>
       </div>
       <div className="navbar-center"></div>
-      <div className="navbar-end">
+      <div className="navbar-end flex gap-3">
+        <LocaleSwitch />
         <AuthWrapper />
       </div>
     </div>
