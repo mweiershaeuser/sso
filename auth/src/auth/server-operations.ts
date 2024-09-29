@@ -9,7 +9,10 @@ import {
 } from "./api-calls";
 import {
   getPrimaryAuthFactorsFromAuthMethods,
+  getPrimaryAuthFactorsFromSessionInfo,
   getSecondaryAuthFactorsFromAuthMethods,
+  getSecondaryAuthFactorsFromSessionInfo,
+  PrimaryAuthFactor,
 } from "./models/auth-factors";
 import { ServerResponse } from "./models/server-response";
 import Session from "./models/session";
@@ -55,6 +58,7 @@ export async function getAuthStateFromSession(
   const authState: AuthState = {
     sessionCreated: false,
     availableAuthFactors: { primary: [], secondary: [] },
+    authenticatedAuthFactors: { primary: [], secondary: [] },
     loggedIn: false,
   };
   if (!session) {
@@ -96,11 +100,21 @@ export async function getAuthStateFromSession(
       availableAuthMethodsResponse.data,
     ),
   };
+  authState.authenticatedAuthFactors = {
+    primary: getPrimaryAuthFactorsFromSessionInfo(sessionInfoResponse.data),
+    secondary: getSecondaryAuthFactorsFromSessionInfo(sessionInfoResponse.data),
+  };
 
   if (
-    sessionInfoResponse.data.session.factors.webAuthN ||
-    sessionInfoResponse.data.session.factors.password
-    /* (sessionInfoResponse.data.session.factors.password  && sessionInfoResponse.data.session.factors.totp) */
+    authState.authenticatedAuthFactors.primary.includes(
+      PrimaryAuthFactor.WEB_AUTH_N,
+    ) ||
+    authState.authenticatedAuthFactors.primary.includes(
+      PrimaryAuthFactor.PASSWORD,
+    )
+    /* (authState.authenticatedAuthFactors.primary.includes(PrimaryAuthFactor.PASSWORD)
+        && authState.authenticatedAuthFactors.secondary.includes(SecondaryAuthFactor.TOTP))
+        */
   ) {
     authState.loggedIn = true;
   }

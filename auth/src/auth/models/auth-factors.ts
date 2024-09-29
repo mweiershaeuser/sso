@@ -1,4 +1,6 @@
+import { AuthCheckProp } from "./zitadel/auth-check-prop";
 import { AuthMethod } from "./zitadel/auth-method";
+import SessionInfo from "./zitadel/session-info";
 
 export interface AuthFactors {
   primary: PrimaryAuthFactor[];
@@ -45,5 +47,46 @@ export function getSecondaryAuthFactorsFromAuthMethods(
 ) {
   return authMethods
     .map((authMethod) => authMethodToSecondaryAuthFactorMap.get(authMethod))
+    .filter((authFactor) => !!authFactor);
+}
+
+const authCheckPropToPrimaryAuthFactorMap = new Map<
+  AuthCheckProp,
+  PrimaryAuthFactor
+>([
+  ["password", PrimaryAuthFactor.PASSWORD],
+  ["webAuthN", PrimaryAuthFactor.WEB_AUTH_N],
+]);
+
+const authCheckPropToSecondaryAuthFactorMap = new Map<
+  AuthCheckProp,
+  SecondaryAuthFactor
+>([["totp", SecondaryAuthFactor.TOTP]]);
+
+export function getPrimaryAuthFactorsFromSessionInfo(sessionInfo: SessionInfo) {
+  const authCheckProps = Object.keys(
+    sessionInfo.session.factors,
+  ) as AuthCheckProp[];
+  return authCheckProps
+    .map((authCheckProp) =>
+      sessionInfo.session.factors[authCheckProp].verifiedAt
+        ? authCheckPropToPrimaryAuthFactorMap.get(authCheckProp)
+        : undefined,
+    )
+    .filter((authFactor) => !!authFactor);
+}
+
+export function getSecondaryAuthFactorsFromSessionInfo(
+  sessionInfo: SessionInfo,
+) {
+  const authCheckProps = Object.keys(
+    sessionInfo.session.factors,
+  ) as AuthCheckProp[];
+  return authCheckProps
+    .map((authCheckProp) =>
+      sessionInfo.session.factors[authCheckProp].verifiedAt
+        ? authCheckPropToSecondaryAuthFactorMap.get(authCheckProp)
+        : undefined,
+    )
     .filter((authFactor) => !!authFactor);
 }
