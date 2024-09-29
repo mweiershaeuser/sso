@@ -190,17 +190,11 @@ export async function deleteSession(): Promise<ServerResponse> {
       },
     );
 
-    if (response.status !== 200) {
-      return { type: "error", message: "Es ist ein Fehler aufgetreten." };
-    }
-
     cookieStore.delete(`session`);
 
     return { type: "success" };
   } catch (error) {
-    return {
-      type: "error",
-      message: "Der Server konnte nicht erreicht werden.",
-    };
+    cookieStore.delete(`session`);
+    return { type: "success" };
   }
 }
