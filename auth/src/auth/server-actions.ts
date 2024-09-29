@@ -164,6 +164,95 @@ export async function authenticateWithPassword(
   }
 }
 
+export async function authenticateWithTotp(
+  _prevState: any,
+  formData: FormData,
+): Promise<ServerResponse> {
+  const cookieStore = cookies();
+
+  const session = getSessionFromCookie();
+
+  if (!session) {
+    return {
+      type: "error",
+      message: "Es wurde keine Session gefunden.",
+    };
+  }
+
+  const totp = formData.get("totp");
+
+  if (!totp || totp.toString().length !== 6) {
+    return {
+      type: "error",
+      errors: { totp: "Bitte Code mit sechs Ziffern eingeben!" },
+    };
+  }
+  if (Object.is(parseInt(totp.toString()), NaN)) {
+    return {
+      type: "error",
+      errors: { totp: "Bitte Code mit sechs Ziffern eingeben!" },
+    };
+  }
+
+  try {
+    const response = await fetch(
+      `${process.env.ZITADEL_HOST}/v2/sessions/${session.sessionId}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${process.env.ZITADEL_ACCESS_TOKEN}`,
+        },
+        body: JSON.stringify({
+          checks: {
+            totp: {
+              code: totp,
+            },
+          },
+          lifetime: "2592000s",
+        }),
+      },
+    );
+
+    if (response.status !== 200) {
+      switch (response.status) {
+        case 400:
+          return {
+            type: "error",
+            errors: { totp: "Der Code ist falsch." },
+          };
+
+        default:
+          return { type: "error", message: "Es ist ein Fehler aufgetreten." };
+      }
+    }
+
+    const updatedSession: { sessionToken: string } = await response.json();
+    session.sessionToken = updatedSession.sessionToken;
+
+    const sessionInfoResponse = await getSessionInfo(session);
+
+    if (sessionInfoResponse.type === "error" || !sessionInfoResponse.data) {
+      return sessionInfoResponse;
+    }
+
+    cookieStore.set(`session`, JSON.stringify(session), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      ...(session.stayLoggedIn
+        ? { expires: new Date(sessionInfoResponse.data.session.expirationDate) }
+        : {}),
+    });
+
+    return { type: "success" };
+  } catch (error) {
+    return {
+      type: "error",
+      message: "Der Server konnte nicht erreicht werden.",
+    };
+  }
+}
+
 export async function deleteSession(): Promise<ServerResponse> {
   const cookieStore = cookies();
 

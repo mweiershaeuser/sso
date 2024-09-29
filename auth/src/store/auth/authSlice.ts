@@ -5,6 +5,7 @@ import { RootState } from "../store";
 const initialState: AuthState = {
   sessionCreated: false,
   availableAuthFactors: { primary: [], secondary: [] },
+  authenticatedAuthFactors: { primary: [], secondary: [] },
   loggedIn: false,
 };
 
@@ -26,6 +27,8 @@ export const selectSessionCreated = (state: RootState) =>
   state.auth.sessionCreated;
 export const selectAvailableAuthFactors = (state: RootState) =>
   state.auth.availableAuthFactors;
+export const selectAuthenticatedAuthFactors = (state: RootState) =>
+  state.auth.authenticatedAuthFactors;
 export const selectLoggedIn = (state: RootState) => state.auth.loggedIn;
 
 export default authSlice.reducer;

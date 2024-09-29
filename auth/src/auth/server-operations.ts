@@ -13,6 +13,7 @@ import {
   getSecondaryAuthFactorsFromAuthMethods,
   getSecondaryAuthFactorsFromSessionInfo,
   PrimaryAuthFactor,
+  SecondaryAuthFactor,
 } from "./models/auth-factors";
 import { ServerResponse } from "./models/server-response";
 import Session from "./models/session";
@@ -109,12 +110,12 @@ export async function getAuthStateFromSession(
     authState.authenticatedAuthFactors.primary.includes(
       PrimaryAuthFactor.WEB_AUTH_N,
     ) ||
-    authState.authenticatedAuthFactors.primary.includes(
+    (authState.authenticatedAuthFactors.primary.includes(
       PrimaryAuthFactor.PASSWORD,
-    )
-    /* (authState.authenticatedAuthFactors.primary.includes(PrimaryAuthFactor.PASSWORD)
-        && authState.authenticatedAuthFactors.secondary.includes(SecondaryAuthFactor.TOTP))
-        */
+    ) &&
+      authState.authenticatedAuthFactors.secondary.includes(
+        SecondaryAuthFactor.TOTP,
+      ))
   ) {
     authState.loggedIn = true;
   }

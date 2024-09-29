@@ -1,22 +1,19 @@
 "use client";
 
-import { authenticateWithPassword } from "@/auth/server-actions";
+import { authenticateWithTotp } from "@/auth/server-actions";
 import { TextInput } from "@/components/form/text-input";
-import { useAppSelector } from "@/store/hooks";
-import { selectUser } from "@/store/user/userSlice";
 import { useEffect, useRef } from "react";
 import { useFormState } from "react-dom";
 import toast from "react-hot-toast";
 
-export default function PasswordForm() {
-  const { username } = useAppSelector(selectUser);
-  const [state, formAction] = useFormState(authenticateWithPassword, undefined);
+export default function TotpForm() {
+  const [state, formAction] = useFormState(authenticateWithTotp, undefined);
 
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const totpRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (state?.errors?.password) {
-      passwordRef.current?.focus();
+    if (state?.errors?.totp) {
+      totpRef.current?.focus();
     }
     if (state?.type === "error" && state?.message) {
       toast.error(state.message);
@@ -34,21 +31,14 @@ export default function PasswordForm() {
         Pflichtfelder sind mit * markiert.
       </p>
 
-      <input
-        type="hidden"
-        name="user"
-        value={username}
-        autoComplete="username"
-      />
-
       <TextInput
-        name={"password"}
-        label={"Passwort"}
-        type="password"
+        name={"totp"}
+        label={"Code"}
+        type="text"
         required
-        autocomplete="current-password"
+        autocomplete="one-time-code"
         formState={state}
-        inputRef={passwordRef}
+        inputRef={totpRef}
       />
 
       <input
