@@ -1,5 +1,6 @@
 import { getAuthState } from "@/auth/server-operations";
 import { redirect } from "next/navigation";
+import UserDetails from "./_components/user-details";
 
 export default async function Account() {
   const authStateResponse = await getAuthState();
@@ -10,7 +11,10 @@ export default async function Account() {
 
   return (
     <div className="p-4">
-      <h1>Account</h1>
+      <h1 className="!font-sans font-normal badge badge-neutral p-4">
+        Account
+      </h1>
+      <UserDetails />
     </div>
   );
 }
