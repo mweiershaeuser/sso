@@ -32,13 +32,42 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} data-theme="mw_auth">
       <body
         className={`min-h-screen flex flex-col ${museo_moderno.variable} ${open_sans.variable} font-sans`}
       >
         <NextIntlClientProvider messages={messages}>
           <StoreProvider>
-            <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
+            <Toaster
+              position="top-center"
+              toastOptions={{
+                duration: 5000,
+                style: {
+                  color: "oklch(var(--ac))",
+                  background: "oklch(var(--a))",
+                },
+                success: {
+                  style: {
+                    color: "oklch(var(--suc))",
+                    background: "oklch(var(--su))",
+                  },
+                  iconTheme: {
+                    primary: "oklch(var(--suc))",
+                    secondary: "oklch(var(--su))",
+                  },
+                },
+                error: {
+                  style: {
+                    color: "oklch(var(--erc))",
+                    background: "oklch(var(--er))",
+                  },
+                  iconTheme: {
+                    primary: "oklch(var(--erc))",
+                    secondary: "oklch(var(--er))",
+                  },
+                },
+              }}
+            />
             <div className="w-full p-4">
               <Header />
             </div>

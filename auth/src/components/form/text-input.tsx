@@ -37,7 +37,7 @@ export function TextInput({
           type={type}
           name={name}
           ref={inputRef}
-          className={`input input-bordered ${formState?.errors?.[name] && "input-error"}`}
+          className={`input input-primary input-bordered ${formState?.errors?.[name] && "input-error"}`}
           autoComplete={autocomplete}
           aria-required={required}
           aria-invalid={!!formState?.errors?.[name]}

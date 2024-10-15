@@ -40,7 +40,11 @@ export default function UsernameForm() {
       <div className="form-control mt-3">
         <label className="label cursor-pointer">
           <span className="label-text">Angemeldet bleiben</span>
-          <input type="checkbox" name="stayLoggedIn" className="checkbox" />
+          <input
+            type="checkbox checkbox-primary"
+            name="stayLoggedIn"
+            className="checkbox"
+          />
         </label>
       </div>
 
