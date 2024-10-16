@@ -1,0 +1,20 @@
+{
+  "name": "mw auth",
+  "theme_color": "#495e35",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "/app_icons/icon192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/app_icons/icon512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

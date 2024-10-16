@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { MuseoModerno, Open_Sans } from "next/font/google";
@@ -18,12 +18,20 @@ const open_sans = Open_Sans({
   variable: "--font-open-sans",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#495e35",
+};
+
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("RootLayout.metadata");
 
   return {
     title: t("title"),
     description: t("description"),
+    appleWebApp: {
+      title: "mw auth",
+      statusBarStyle: "default",
+    },
   };
 }
 
