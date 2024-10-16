@@ -1,4 +1,5 @@
 import { ServerResponse } from "@/auth/models/server-response";
+import { useTranslations } from "next-intl";
 import {
   HTMLInputAutoCompleteAttribute,
   HTMLInputTypeAttribute,
@@ -22,6 +23,8 @@ export function TextInput({
   formState?: ServerResponse;
   inputRef?: RefObject<HTMLInputElement>;
 }) {
+  const t = useTranslations("Global.Components.TextInput");
+
   return (
     <>
       <label className="form-control">
@@ -48,7 +51,7 @@ export function TextInput({
         <p id={`${name}Error`} className="m-0 text-error">
           <i
             className="bi bi-exclamation-circle-fill"
-            aria-label="Fehler: "
+            aria-label={`${t("error-message-icon-aria-label")}: `}
             role="img"
           ></i>{" "}
           {formState?.errors?.[name]}

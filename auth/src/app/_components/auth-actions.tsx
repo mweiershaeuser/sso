@@ -21,7 +21,9 @@ export default function AuthActions({
 }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
+
   const t = useTranslations("RootLayout.Header.Auth");
+  const t_global = useTranslations("Global");
 
   const {
     type: authStateSuccess,
@@ -41,12 +43,12 @@ export default function AuthActions({
 
   useEffect(() => {
     if (authStateSuccess === "error") {
-      toast.error(authStateError ?? "Es ist ein Fehler aufgetreten.");
+      toast.error(authStateError ?? t_global("ErrorMessages.Generic"));
     }
     if (userSuccess === "error" && authStateSuccess !== "error") {
-      toast.error(userError ?? "Es ist ein Fehler aufgetreten.");
+      toast.error(userError ?? t_global("ErrorMessages.Generic"));
     }
-  }, [authStateError, authStateSuccess, userError, userSuccess]);
+  }, [authStateError, authStateSuccess, t_global, userError, userSuccess]);
 
   const loginOrLogout = useCallback(() => {
     if (!authState?.loggedIn) {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
+import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { MuseoModerno, Open_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Footer from "./_components/footer";
@@ -18,10 +18,14 @@ const open_sans = Open_Sans({
   variable: "--font-open-sans",
 });
 
-export const metadata: Metadata = {
-  title: "auth.melvinweiershaeuser.de",
-  description: "Single Sign-On",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("RootLayout.metadata");
+
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 export default async function RootLayout({
   children,

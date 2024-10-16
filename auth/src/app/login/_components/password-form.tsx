@@ -4,11 +4,14 @@ import { authenticateWithPassword } from "@/auth/server-actions";
 import { TextInput } from "@/components/form/text-input";
 import { useAppSelector } from "@/store/hooks";
 import { selectUser } from "@/store/user/userSlice";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { useFormState } from "react-dom";
 import toast from "react-hot-toast";
 
 export default function PasswordForm() {
+  const t = useTranslations("Login.LoginForm.AuthFactorsForm.PasswordForm");
+
   const { username } = useAppSelector(selectUser);
   const [state, formAction] = useFormState(authenticateWithPassword, undefined);
 
@@ -28,10 +31,10 @@ export default function PasswordForm() {
       <p aria-hidden>
         <i
           className="bi bi-info-circle-fill"
-          aria-label="Info: "
+          aria-label={`${t("required-message.icon-aria-label")}: `}
           role="img"
         ></i>{" "}
-        Pflichtfelder sind mit * markiert.
+        {t("required-message.message")}
       </p>
 
       <input
@@ -43,7 +46,7 @@ export default function PasswordForm() {
 
       <TextInput
         name={"password"}
-        label={"Passwort"}
+        label={t("password-input-label")}
         type="password"
         required
         autocomplete="current-password"
@@ -55,7 +58,7 @@ export default function PasswordForm() {
         type="submit"
         role="button"
         className="btn btn-primary mt-3"
-        value="Weiter"
+        value={t("submit-button-label")}
       />
     </form>
   );

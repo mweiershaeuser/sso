@@ -2,11 +2,14 @@
 
 import { authenticateWithTotp } from "@/auth/server-actions";
 import { TextInput } from "@/components/form/text-input";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { useFormState } from "react-dom";
 import toast from "react-hot-toast";
 
 export default function TotpForm() {
+  const t = useTranslations("Login.LoginForm.AuthFactorsForm.TotpForm");
+
   const [state, formAction] = useFormState(authenticateWithTotp, undefined);
 
   const totpRef = useRef<HTMLInputElement>(null);
@@ -25,15 +28,15 @@ export default function TotpForm() {
       <p aria-hidden>
         <i
           className="bi bi-info-circle-fill"
-          aria-label="Info: "
+          aria-label={`${t("required-message.icon-aria-label")}: `}
           role="img"
         ></i>{" "}
-        Pflichtfelder sind mit * markiert.
+        {t("required-message.message")}
       </p>
 
       <TextInput
         name={"totp"}
-        label={"Code"}
+        label={t("totp-input-label")}
         type="text"
         required
         autocomplete="one-time-code"
@@ -45,7 +48,7 @@ export default function TotpForm() {
         type="submit"
         role="button"
         className="btn btn-primary mt-3"
-        value="Anmelden"
+        value={t("submit-button-label")}
       />
     </form>
   );

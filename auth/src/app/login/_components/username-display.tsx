@@ -3,12 +3,16 @@
 import { deleteSession } from "@/auth/server-actions";
 import { useAppSelector } from "@/store/hooks";
 import { selectUser } from "@/store/user/userSlice";
+import { useTranslations } from "next-intl";
 
 export default function UsernameDisplay() {
   const { username, givenName, familyName } = useAppSelector(selectUser);
+
+  const t = useTranslations("Login.LoginForm.UsernameDisplay");
+
   return (
     <>
-      <p className="mb-2">Anmelden als:</p>
+      <p className="mb-2">{t("login-as")}:</p>
       <div className="flex items-center justify-between bg-base-100 rounded-lg shadow p-4">
         <div className="flex items-center gap-5">
           <div className="avatar placeholder">
@@ -31,7 +35,7 @@ export default function UsernameDisplay() {
           >
             <i
               className="bi bi-x-lg"
-              aria-label="Benutzer:in ändern"
+              aria-label={t("change-user-button-aria-label")}
               role="img"
             ></i>
           </button>

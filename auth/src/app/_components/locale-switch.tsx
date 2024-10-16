@@ -1,12 +1,18 @@
 "use client";
 
-import { locales } from "@/i18n/models/locale";
+import { Locale, locales, localeToLanguageMap } from "@/i18n/models/locale";
 import { initialiseLocale, setLocale } from "@/i18n/server-actions";
-import { useLocale } from "next-intl";
-import { useEffect } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useMemo } from "react";
 
 export default function LocaleSwitch() {
   const locale = useLocale();
+  const t = useTranslations("RootLayout.Header.LocaleSwitch");
+
+  const localeLanguageString = useMemo(
+    () => localeToLanguageMap.get(locale as Locale),
+    [locale],
+  );
 
   useEffect(() => {
     initialiseLocale();
@@ -17,10 +23,10 @@ export default function LocaleSwitch() {
       <div tabIndex={0} role="button" className="btn btn-ghost">
         <i
           className="bi bi-translate"
-          aria-label="Sprachauswahl: "
+          aria-label={`${t("icon-aria-label")}: `}
           role="img"
         ></i>
-        {locale}
+        <span aria-label={localeLanguageString}>{locale}</span>
       </div>
       <ul
         tabIndex={0}
@@ -28,7 +34,12 @@ export default function LocaleSwitch() {
       >
         {locales.map((locale) => (
           <li key={locale}>
-            <button onClick={() => setLocale(locale)}>{locale}</button>
+            <button
+              aria-label={localeToLanguageMap.get(locale)}
+              onClick={() => setLocale(locale)}
+            >
+              {locale}
+            </button>
           </li>
         ))}
       </ul>

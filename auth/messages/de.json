@@ -1,10 +1,98 @@
 {
   "RootLayout": {
+    "metadata": {
+      "title": "mw auth",
+      "description": "Barrierefreier Single Sign-On mit Passkey-Unterstützung"
+    },
     "Header": {
+      "LocaleSwitch": {
+        "icon-aria-label": "Sprachauswahl"
+      },
       "Auth": {
         "login-button-text": "Anmelden",
         "logout-button-text": "Abmelden"
       }
+    }
+  },
+  "Home": {
+    "metadata": {
+      "title": "Start - mw auth",
+      "description": "Barrierefreier Single Sign-On mit Passkey-Unterstützung"
+    },
+    "h1": "Willkommen!",
+    "Cards": {
+      "LoginCard": {
+        "heading": "Anmeldung",
+        "description": "Bereits registriert? Jetzt anmelden!",
+        "action": "Zur Anmeldung"
+      }
+    }
+  },
+  "Login": {
+    "metadata": {
+      "title": "Anmeldung - mw auth",
+      "description": "Barrierefreier Single Sign-On mit Passkey-Unterstützung"
+    },
+    "h1": "Anmeldung",
+    "LoginForm": {
+      "UsernameForm": {
+        "required-message": {
+          "icon-aria-label": "Info",
+          "message": "Pflichtfelder sind mit * markiert."
+        },
+        "username-input-label": "Benutzername",
+        "stay-logged-in-checkbox-label": "Angemeldet bleiben",
+        "submit-button-label": "Weiter"
+      },
+      "UsernameDisplay": {
+        "login-as": "Anmelden als",
+        "change-user-button-aria-label": "Benutzer:in ändern"
+      },
+      "AuthFactorsForm": {
+        "PasswordForm": {
+          "required-message": {
+            "icon-aria-label": "Info",
+            "message": "Pflichtfelder sind mit * markiert."
+          },
+          "password-input-label": "Passwort",
+          "submit-button-label": "Weiter"
+        },
+        "TotpForm": {
+          "required-message": {
+            "icon-aria-label": "Info",
+            "message": "Pflichtfelder sind mit * markiert."
+          },
+          "totp-input-label": "Code",
+          "submit-button-label": "Anmelden"
+        }
+      }
+    }
+  },
+  "Account": {
+    "metadata": {
+      "title": "Konto - mw auth",
+      "description": "Barrierefreier Single Sign-On mit Passkey-Unterstützung"
+    },
+    "h1": "Konto",
+    "UserDetails": {
+      "greeting": "Hallo",
+      "heading": "Deine Daten",
+      "UserData": {
+        "username": "Benutzername",
+        "email": "E-Mail",
+        "given-name": "Vorname",
+        "family-name": "Nachname"
+      }
+    }
+  },
+  "Global": {
+    "Components": {
+      "TextInput": {
+        "error-message-icon-aria-label": "Fehler"
+      }
+    },
+    "ErrorMessages": {
+      "Generic": "Es ist ein Fehler aufgetreten!"
     }
   }
 }

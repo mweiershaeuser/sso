@@ -1,8 +1,21 @@
 import { getAuthState } from "@/auth/server-operations";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import UserDetails from "./_components/user-details";
 
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("Account.metadata");
+
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
+
 export default async function Account() {
+  const t = await getTranslations("Account");
+
   const authStateResponse = await getAuthState();
 
   if (!authStateResponse.data?.loggedIn) {
@@ -12,7 +25,7 @@ export default async function Account() {
   return (
     <div className="p-4">
       <h1 className="!font-sans font-normal badge badge-neutral p-4">
-        Account
+        {t("h1")}
       </h1>
       <UserDetails />
     </div>
