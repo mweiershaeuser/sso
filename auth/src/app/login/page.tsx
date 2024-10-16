@@ -24,7 +24,7 @@ export default async function Login() {
 
   return (
     <div className="grow p-4 flex flex-col justify-center items-center">
-      <div className="w-full md:w-2/3 lg:w-1/2 2xl:w-1/3 p-8 rounded-lg bg-base-300 text-base-content">
+      <div className="w-full md:w-2/3 lg:w-1/2 2xl:w-1/3 p-8 rounded-lg bg-base-200 text-base-content">
         <h1>{t("h1")}</h1>
         <LoginForm />
       </div>

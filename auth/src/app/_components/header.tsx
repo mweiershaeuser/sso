@@ -4,7 +4,7 @@ import LocaleSwitch from "./locale-switch";
 
 export default function Header() {
   return (
-    <div className="navbar w-full rounded-lg bg-base-300">
+    <div className="navbar w-full rounded-lg bg-base-200">
       <div className="navbar-start">
         <div className="font-display">
           <Link href="/" className="btn btn-ghost text-2xl">

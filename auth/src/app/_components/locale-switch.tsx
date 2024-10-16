@@ -30,7 +30,7 @@ export default function LocaleSwitch() {
       </div>
       <ul
         tabIndex={0}
-        className="menu dropdown-content rounded-box bg-base-300 z-[1] p-2 shadow"
+        className="menu dropdown-content rounded-box bg-base-200 z-[1] p-2 shadow"
       >
         {locales.map((locale) => (
           <li key={locale}>
