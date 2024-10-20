@@ -23,7 +23,7 @@ export function TextInput({
   formState?: ServerResponse;
   inputRef?: RefObject<HTMLInputElement>;
 }) {
-  const t = useTranslations("Global.Components.TextInput");
+  const t = useTranslations("components.form.TextInput");
 
   return (
     <>
@@ -51,7 +51,7 @@ export function TextInput({
         <p id={`${name}Error`} className="m-0 text-error">
           <i
             className="bi bi-exclamation-circle-fill"
-            aria-label={`${t("error-message-icon-aria-label")}: `}
+            aria-label={`${t("errorMessageIconAriaLabel")}: `}
             role="img"
           ></i>{" "}
           {formState?.errors?.[name]}

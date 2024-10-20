@@ -85,14 +85,27 @@
       }
     }
   },
-  "Global": {
-    "Components": {
-      "TextInput": {
-        "error-message-icon-aria-label": "Fehler"
+  "auth": {
+    "serverActions": {
+      "createSession": {
+        "errorMessages": {
+          "emptyUsername": "Bitte Benutzernamen eingeben!",
+          "userNotFound": "Der Benutzer konnte nicht gefunden werden."
+        }
       }
-    },
-    "ErrorMessages": {
-      "Generic": "Es ist ein Fehler aufgetreten!"
+    }
+  },
+  "components": {
+    "form": {
+      "TextInput": {
+        "errorMessageIconAriaLabel": "Fehler"
+      }
+    }
+  },
+  "global": {
+    "errorMessages": {
+      "generic": "Es ist ein Fehler aufgetreten!",
+      "serverError": "Der Server konnte nicht erreicht werden!"
     }
   }
 }

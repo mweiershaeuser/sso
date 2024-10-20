@@ -23,7 +23,7 @@ export default function AuthActions({
   const dispatch = useAppDispatch();
 
   const t = useTranslations("RootLayout.Header.Auth");
-  const t_global = useTranslations("Global");
+  const t_global = useTranslations("global");
 
   const {
     type: authStateSuccess,
@@ -43,10 +43,10 @@ export default function AuthActions({
 
   useEffect(() => {
     if (authStateSuccess === "error") {
-      toast.error(authStateError ?? t_global("ErrorMessages.Generic"));
+      toast.error(authStateError ?? t_global("errorMessages.generic"));
     }
     if (userSuccess === "error" && authStateSuccess !== "error") {
-      toast.error(userError ?? t_global("ErrorMessages.Generic"));
+      toast.error(userError ?? t_global("errorMessages.generic"));
     }
   }, [authStateError, authStateSuccess, t_global, userError, userSuccess]);
 

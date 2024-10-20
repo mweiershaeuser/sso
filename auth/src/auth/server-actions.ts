@@ -1,5 +1,6 @@
 "use server";
 
+import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import { getSessionInfo } from "./api-calls";
 import { ServerResponse } from "./models/server-response";
@@ -10,6 +11,9 @@ export async function createSession(
   _prevState: any,
   formData: FormData,
 ): Promise<ServerResponse> {
+  const t = await getTranslations("auth.serverActions.createSession");
+  const t_global = await getTranslations("global");
+
   const cookieStore = cookies();
 
   const user = formData.get("user");
@@ -18,7 +22,7 @@ export async function createSession(
   if (!user || user.toString().length < 1) {
     return {
       type: "error",
-      errors: { user: "Bitte Benutzernamen eingeben!" },
+      errors: { user: t("errorMessages.emptyUsername") },
     };
   }
 
@@ -43,11 +47,11 @@ export async function createSession(
         case 404:
           return {
             type: "error",
-            errors: { user: "Der Benutzer konnte nicht gefunden werden." },
+            errors: { user: t("errorMessages.userNotFound") },
           };
 
         default:
-          return { type: "error", message: "Es ist ein Fehler aufgetreten." };
+          return { type: "error", message: t_global("errorMessages.generic") };
       }
     }
 
@@ -75,7 +79,7 @@ export async function createSession(
   } catch (error) {
     return {
       type: "error",
-      message: "Der Server konnte nicht erreicht werden.",
+      message: t_global("errorMessages.serverError"),
     };
   }
 }

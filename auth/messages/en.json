@@ -85,14 +85,27 @@
       }
     }
   },
-  "Global": {
-    "Components": {
-      "TextInput": {
-        "error-message-icon-aria-label": "Error"
+  "auth": {
+    "serverActions": {
+      "createSession": {
+        "errorMessages": {
+          "emptyUsername": "Please enter your username!",
+          "userNotFound": "The given user was not found."
+        }
       }
-    },
-    "ErrorMessages": {
-      "Generic": "An error occured!"
+    }
+  },
+  "components": {
+    "form": {
+      "TextInput": {
+        "errorMessageIconAriaLabel": "Error"
+      }
+    }
+  },
+  "global": {
+    "errorMessages": {
+      "generic": "An error occured!",
+      "serverError": "The server could not be reached!"
     }
   }
 }
