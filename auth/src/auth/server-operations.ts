@@ -73,7 +73,7 @@ export async function getAuthStateFromSession(
   if (sessionInfoResponse.type === "error" || !sessionInfoResponse.data) {
     return {
       type: "error",
-      message: sessionInfoResponse.message,
+      messageT: sessionInfoResponse.messageT,
       data: authState,
     };
   }
@@ -87,7 +87,7 @@ export async function getAuthStateFromSession(
   ) {
     return {
       type: "error",
-      message: availableAuthMethodsResponse.message,
+      messageT: availableAuthMethodsResponse.messageT,
       data: authState,
     };
   }
@@ -148,7 +148,7 @@ export async function getUserFromSession(
   if (authStateResponse.type === "error" || !authStateResponse.data) {
     return {
       type: "error",
-      message: authStateResponse.message,
+      messageT: authStateResponse.messageT,
       data: emptyUser,
     };
   }
@@ -159,7 +159,7 @@ export async function getUserFromSession(
   if (sessionInfoResponse.type === "error" || !sessionInfoResponse.data) {
     return {
       type: "error",
-      message: sessionInfoResponse.message,
+      messageT: sessionInfoResponse.messageT,
       data: emptyUser,
     };
   }
@@ -170,7 +170,7 @@ export async function getUserFromSession(
   if (userInfoResponse.type === "error" || !userInfoResponse.data) {
     return {
       type: "error",
-      message: userInfoResponse.message,
+      messageT: userInfoResponse.messageT,
       data: emptyUser,
     };
   }

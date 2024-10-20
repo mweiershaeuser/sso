@@ -1,3 +1,5 @@
+import { TranslationKey } from "@/i18n/models/translation";
+
 export type ServerResponse<T = void> = T extends void
   ? ServerResponseBase
   : ServerResponseWithData<T>;
@@ -5,6 +7,7 @@ export type ServerResponse<T = void> = T extends void
 interface ServerResponseBase {
   type: "success" | "error";
   message?: string;
+  messageT?: TranslationKey;
   errors?: FieldError;
 }
 

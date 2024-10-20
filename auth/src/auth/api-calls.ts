@@ -22,7 +22,7 @@ export async function getSessionInfo(
   } catch (error) {
     return {
       type: "error",
-      message: "Der Server konnte nicht erreicht werden.",
+      messageT: "global.errorMessages.serverError",
     };
   }
 }
@@ -46,7 +46,7 @@ export async function getAvailableAuthMethods(
   } catch (error) {
     return {
       type: "error",
-      message: "Der Server konnte nicht erreicht werden.",
+      messageT: "global.errorMessages.serverError",
     };
   }
 }
@@ -69,7 +69,7 @@ export async function getUserInfo(
   } catch (error) {
     return {
       type: "error",
-      message: "Der Server konnte nicht erreicht werden.",
+      messageT: "global.errorMessages.serverError",
     };
   }
 }

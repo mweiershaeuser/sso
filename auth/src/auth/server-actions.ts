@@ -11,8 +11,7 @@ export async function createSession(
   _prevState: any,
   formData: FormData,
 ): Promise<ServerResponse> {
-  const t = await getTranslations("auth.serverActions.createSession");
-  const t_global = await getTranslations("global");
+  const t = await getTranslations();
 
   const cookieStore = cookies();
 
@@ -22,7 +21,9 @@ export async function createSession(
   if (!user || user.toString().length < 1) {
     return {
       type: "error",
-      errors: { user: t("errorMessages.emptyUsername") },
+      errors: {
+        user: t("auth.serverActions.createSession.errorMessages.emptyUsername"),
+      },
     };
   }
 
@@ -47,11 +48,15 @@ export async function createSession(
         case 404:
           return {
             type: "error",
-            errors: { user: t("errorMessages.userNotFound") },
+            errors: {
+              user: t(
+                "auth.serverActions.createSession.errorMessages.userNotFound",
+              ),
+            },
           };
 
         default:
-          return { type: "error", message: t_global("errorMessages.generic") };
+          return { type: "error", message: t("global.errorMessages.generic") };
       }
     }
 
@@ -61,7 +66,10 @@ export async function createSession(
     const sessionInfoResponse = await getSessionInfo(session);
 
     if (sessionInfoResponse.type === "error" || !sessionInfoResponse.data) {
-      return sessionInfoResponse;
+      const message = sessionInfoResponse.messageT
+        ? t(sessionInfoResponse.messageT)
+        : t("global.errorMessages.generic");
+      return { type: "error", message };
     }
 
     cookieStore.set(`session`, JSON.stringify(session), {
@@ -79,7 +87,7 @@ export async function createSession(
   } catch (error) {
     return {
       type: "error",
-      message: t_global("errorMessages.serverError"),
+      message: t("global.errorMessages.serverError"),
     };
   }
 }
@@ -88,10 +96,7 @@ export async function authenticateWithPassword(
   _prevState: any,
   formData: FormData,
 ): Promise<ServerResponse> {
-  const t = await getTranslations(
-    "auth.serverActions.authenticateWithPassword",
-  );
-  const t_global = await getTranslations("global");
+  const t = await getTranslations();
 
   const cookieStore = cookies();
 
@@ -100,7 +105,9 @@ export async function authenticateWithPassword(
   if (!session) {
     return {
       type: "error",
-      message: t("errorMessages.noSessionFound"),
+      message: t(
+        "auth.serverActions.authenticateWithPassword.errorMessages.noSessionFound",
+      ),
     };
   }
 
@@ -109,7 +116,11 @@ export async function authenticateWithPassword(
   if (!password || password.toString().length < 1) {
     return {
       type: "error",
-      errors: { password: t("errorMessages.emptyPassword") },
+      errors: {
+        password: t(
+          "auth.serverActions.authenticateWithPassword.errorMessages.emptyPassword",
+        ),
+      },
     };
   }
 
@@ -137,11 +148,15 @@ export async function authenticateWithPassword(
         case 400:
           return {
             type: "error",
-            errors: { password: t("errorMessages.passwordIncorrect") },
+            errors: {
+              password: t(
+                "auth.serverActions.authenticateWithPassword.errorMessages.passwordIncorrect",
+              ),
+            },
           };
 
         default:
-          return { type: "error", message: t_global("errorMessages.generic") };
+          return { type: "error", message: t("global.errorMessages.generic") };
       }
     }
 
@@ -151,7 +166,10 @@ export async function authenticateWithPassword(
     const sessionInfoResponse = await getSessionInfo(session);
 
     if (sessionInfoResponse.type === "error" || !sessionInfoResponse.data) {
-      return sessionInfoResponse;
+      const message = sessionInfoResponse.messageT
+        ? t(sessionInfoResponse.messageT)
+        : t("global.errorMessages.generic");
+      return { type: "error", message };
     }
 
     cookieStore.set(`session`, JSON.stringify(session), {
@@ -167,7 +185,7 @@ export async function authenticateWithPassword(
   } catch (error) {
     return {
       type: "error",
-      message: t_global("errorMessages.serverError"),
+      message: t("global.errorMessages.serverError"),
     };
   }
 }
@@ -176,8 +194,7 @@ export async function authenticateWithTotp(
   _prevState: any,
   formData: FormData,
 ): Promise<ServerResponse> {
-  const t = await getTranslations("auth.serverActions.authenticateWithTotp");
-  const t_global = await getTranslations("global");
+  const t = await getTranslations();
 
   const cookieStore = cookies();
 
@@ -186,7 +203,9 @@ export async function authenticateWithTotp(
   if (!session) {
     return {
       type: "error",
-      message: t("errorMessages.noSessionFound"),
+      message: t(
+        "auth.serverActions.authenticateWithTotp.errorMessages.noSessionFound",
+      ),
     };
   }
 
@@ -195,13 +214,21 @@ export async function authenticateWithTotp(
   if (!totp || totp.toString().length !== 6) {
     return {
       type: "error",
-      errors: { totp: t("errorMessages.emptyTotp") },
+      errors: {
+        totp: t(
+          "auth.serverActions.authenticateWithTotp.errorMessages.emptyTotp",
+        ),
+      },
     };
   }
   if (Object.is(parseInt(totp.toString()), NaN)) {
     return {
       type: "error",
-      errors: { totp: t("errorMessages.invalidCharacters") },
+      errors: {
+        totp: t(
+          "auth.serverActions.authenticateWithTotp.errorMessages.invalidCharacters",
+        ),
+      },
     };
   }
 
@@ -229,11 +256,15 @@ export async function authenticateWithTotp(
         case 400:
           return {
             type: "error",
-            errors: { totp: t("errorMessages.totpIncorrect") },
+            errors: {
+              totp: t(
+                "auth.serverActions.authenticateWithTotp.errorMessages.totpIncorrect",
+              ),
+            },
           };
 
         default:
-          return { type: "error", message: t_global("errorMessages.generic") };
+          return { type: "error", message: t("global.errorMessages.generic") };
       }
     }
 
@@ -243,7 +274,10 @@ export async function authenticateWithTotp(
     const sessionInfoResponse = await getSessionInfo(session);
 
     if (sessionInfoResponse.type === "error" || !sessionInfoResponse.data) {
-      return sessionInfoResponse;
+      const message = sessionInfoResponse.messageT
+        ? t(sessionInfoResponse.messageT)
+        : t("global.errorMessages.generic");
+      return { type: "error", message };
     }
 
     cookieStore.set(`session`, JSON.stringify(session), {
@@ -259,13 +293,13 @@ export async function authenticateWithTotp(
   } catch (error) {
     return {
       type: "error",
-      message: t_global("errorMessages.serverError"),
+      message: t("global.errorMessages.serverError"),
     };
   }
 }
 
 export async function deleteSession(): Promise<ServerResponse> {
-  const t = await getTranslations("auth.serverActions.deleteSession");
+  const t = await getTranslations();
 
   const cookieStore = cookies();
 
@@ -274,7 +308,9 @@ export async function deleteSession(): Promise<ServerResponse> {
   if (!session) {
     return {
       type: "error",
-      message: t("errorMessages.noSessionFound"),
+      message: t(
+        "auth.serverActions.deleteSession.errorMessages.noSessionFound",
+      ),
     };
   }
 

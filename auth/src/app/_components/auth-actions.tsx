@@ -23,14 +23,20 @@ export default function AuthActions({
   const dispatch = useAppDispatch();
 
   const t = useTranslations("RootLayout.Header.Auth");
-  const t_global = useTranslations("global");
+  const t_global = useTranslations();
 
   const {
     type: authStateSuccess,
     data: authState,
     message: authStateError,
+    messageT: authStateErrorT,
   } = authStateResponse;
-  const { type: userSuccess, data: user, message: userError } = userResponse;
+  const {
+    type: userSuccess,
+    data: user,
+    message: userError,
+    messageT: userErrorT,
+  } = userResponse;
 
   useEffect(() => {
     if (authState) {
@@ -43,12 +49,28 @@ export default function AuthActions({
 
   useEffect(() => {
     if (authStateSuccess === "error") {
-      toast.error(authStateError ?? t_global("errorMessages.generic"));
+      toast.error(
+        authStateErrorT
+          ? t_global(authStateErrorT)
+          : (authStateError ?? t_global("global.errorMessages.generic")),
+      );
     }
     if (userSuccess === "error" && authStateSuccess !== "error") {
-      toast.error(userError ?? t_global("errorMessages.generic"));
+      toast.error(
+        userErrorT
+          ? t_global(userErrorT)
+          : (userError ?? t_global("global.errorMessages.generic")),
+      );
     }
-  }, [authStateError, authStateSuccess, t_global, userError, userSuccess]);
+  }, [
+    authStateError,
+    authStateErrorT,
+    authStateSuccess,
+    t_global,
+    userError,
+    userErrorT,
+    userSuccess,
+  ]);
 
   const loginOrLogout = useCallback(() => {
     if (!authState?.loggedIn) {
