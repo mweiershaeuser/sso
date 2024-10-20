@@ -90,7 +90,27 @@
       "createSession": {
         "errorMessages": {
           "emptyUsername": "Bitte Benutzernamen eingeben!",
-          "userNotFound": "Der Benutzer konnte nicht gefunden werden."
+          "userNotFound": "Der Benutzer konnte nicht gefunden werden!"
+        }
+      },
+      "authenticateWithPassword": {
+        "errorMessages": {
+          "noSessionFound": "Es wurde keine Session gefunden. Bitte zuerst einen gültigen Benutzernamen eingeben.",
+          "emptyPassword": "Bitte Passwort eingeben!",
+          "passwordIncorrect": "Das Passwort ist falsch!"
+        }
+      },
+      "authenticateWithTotp": {
+        "errorMessages": {
+          "noSessionFound": "Es wurde keine Session gefunden.",
+          "emptyTotp": "Bitte den sechsstelligen Code aus der Authenticator App eingeben!",
+          "invalidCharacters": "Ungültige Zeichenkette! Bitte den sechsstelligen Code aus der Authenticator App eingeben!",
+          "totpIncorrect": "Der Code ist falsch!"
+        }
+      },
+      "deleteSession": {
+        "errorMessages": {
+          "noSessionFound": "Es wurde keine Session gefunden."
         }
       }
     }

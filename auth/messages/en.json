@@ -90,7 +90,27 @@
       "createSession": {
         "errorMessages": {
           "emptyUsername": "Please enter your username!",
-          "userNotFound": "The given user was not found."
+          "userNotFound": "The given user was not found!"
+        }
+      },
+      "authenticateWithPassword": {
+        "errorMessages": {
+          "noSessionFound": "No session was found. Please enter a valid username first.",
+          "emptyPassword": "Please enter your password!",
+          "passwordIncorrect": "The given password is incorrect!"
+        }
+      },
+      "authenticateWithTotp": {
+        "errorMessages": {
+          "noSessionFound": "No session was found.",
+          "emptyTotp": "Please enter the six-digit code from your authenticator app!",
+          "invalidCharacters": "Invalid characters! Please enter the six-digit code from your authenticator app!",
+          "totpIncorrect": "The given code is incorrect!"
+        }
+      },
+      "deleteSession": {
+        "errorMessages": {
+          "noSessionFound": "No session was found."
         }
       }
     }
