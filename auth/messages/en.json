@@ -49,6 +49,10 @@
         "change-user-button-aria-label": "Change user"
       },
       "AuthFactorsForm": {
+        "dividerText": "OR",
+        "WebauthnForm": {
+          "webauthnButtonLabel": "Sign in with Passkey"
+        },
         "PasswordForm": {
           "required-message": {
             "icon-aria-label": "Info",
@@ -83,6 +87,11 @@
         "given-name": "Given name",
         "family-name": "Family name"
       }
+    },
+    "PasswordlessAuthSettings": {
+      "heading": "Passwordless Login",
+      "registerButtonLabel": "Create Passkey",
+      "passkeyExistsMessage": "You already have created a Passkey."
     }
   },
   "auth": {
@@ -106,6 +115,26 @@
           "emptyTotp": "Please enter the six-digit code from your authenticator app!",
           "invalidCharacters": "Invalid characters! Please enter the six-digit code from your authenticator app!",
           "totpIncorrect": "The given code is incorrect!"
+        }
+      },
+      "startWebauthnRegistration": {
+        "errorMessages": {
+          "noSessionFound": "No session was found."
+        }
+      },
+      "completeWebauthnRegistration": {
+        "errorMessages": {
+          "noSessionFound": "No session was found."
+        }
+      },
+      "createWebauthnChallenge": {
+        "errorMessages": {
+          "noSessionFound": "No session was found."
+        }
+      },
+      "authenticateWithWebauthn": {
+        "errorMessages": {
+          "noSessionFound": "No session was found."
         }
       },
       "deleteSession": {
