@@ -34,16 +34,8 @@ export async function webauthnRegistrationFlow(): Promise<ServerResponse> {
   }
 
   const { passkeyId, creationOptions } = startWebauthnRegistrationData;
-  const enc = new TextEncoder();
   const publicKeyCredentialCreationOptions: PublicKeyCredentialCreationOptions =
-    {
-      ...(creationOptions as unknown as PublicKeyCredentialCreationOptions),
-      challenge: enc.encode(creationOptions.challenge),
-      user: {
-        ...creationOptions.user,
-        id: enc.encode(creationOptions.user.id),
-      },
-    };
+    (PublicKeyCredential as any).parseCreationOptionsFromJSON(creationOptions);
 
   const credential = await createWebauthnCredential(
     publicKeyCredentialCreationOptions,
