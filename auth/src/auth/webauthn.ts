@@ -89,8 +89,12 @@ export async function webauthnLoginFlow(): Promise<ServerResponse> {
     };
   }
 
+  const parsedPublicKeyCredentialRequestOptions = (
+    PublicKeyCredential as any
+  ).parseRequestOptionsFromJSON(publicKeyCredentialRequestOptions);
+
   const credential = await getWebauthnCredential(
-    publicKeyCredentialRequestOptions,
+    parsedPublicKeyCredentialRequestOptions,
   );
 
   if (!credential) {
