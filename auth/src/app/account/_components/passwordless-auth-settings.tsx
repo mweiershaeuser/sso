@@ -5,12 +5,15 @@ import { webauthnRegistrationFlow } from "@/auth/webauthn";
 import { selectAuth } from "@/store/auth/authSlice";
 import { useAppSelector } from "@/store/hooks";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import toast from "react-hot-toast";
 
 export default function PasswordlessAuthSettings() {
   const t = useTranslations("Account.PasswordlessAuthSettings");
   const t_global = useTranslations();
+
+  const router = useRouter();
 
   const { availableAuthFactors } = useAppSelector(selectAuth);
 
@@ -26,8 +29,10 @@ export default function PasswordlessAuthSettings() {
           ? t_global(webauthnErrorT)
           : (webauthnError ?? t_global("global.errorMessages.generic")),
       );
+    } else {
+      router.refresh();
     }
-  }, [t_global]);
+  }, [router, t_global]);
 
   return (
     <>
