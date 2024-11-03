@@ -64,10 +64,26 @@ export async function webauthnRegistrationFlow(): Promise<ServerResponse> {
 
 export async function getWebauthnCredential(
   publicKeyCredentialRequestOptions: PublicKeyCredentialRequestOptions,
-) {
-  return navigator.credentials.get({
-    publicKey: publicKeyCredentialRequestOptions,
-  });
+): Promise<ServerResponse<Credential>> {
+  try {
+    const credential = await navigator.credentials.get({
+      publicKey: publicKeyCredentialRequestOptions,
+    });
+
+    if (!credential) {
+      return {
+        type: "error",
+        messageT: "auth.webauthn.getWebauthnCredential.errorMessages.generic",
+      };
+    }
+
+    return { type: "success", data: credential };
+  } catch (error) {
+    return {
+      type: "error",
+      messageT: "auth.webauthn.getWebauthnCredential.errorMessages.generic",
+    };
+  }
 }
 
 export async function webauthnLoginFlow(): Promise<ServerResponse> {
@@ -93,19 +109,26 @@ export async function webauthnLoginFlow(): Promise<ServerResponse> {
     PublicKeyCredential as any
   ).parseRequestOptionsFromJSON(createWebauthnChallengeData);
 
-  const credential = await getWebauthnCredential(
-    publicKeyCredentialRequestOptions,
-  );
+  const {
+    type: credentialSuccess,
+    message: credentialError,
+    messageT: credentialErrorT,
+    data: credentialData,
+  } = await getWebauthnCredential(publicKeyCredentialRequestOptions);
 
-  if (!credential) {
-    return { type: "error" };
+  if (credentialSuccess === "error" || !credentialData) {
+    return {
+      type: "error",
+      message: credentialError,
+      messageT: credentialErrorT,
+    };
   }
 
   const {
     type: authenticateWithWebauthnSuccess,
     message: authenticateWithWebauthnError,
     messageT: authenticateWithWebauthnErrorT,
-  } = await authenticateWithWebauthn(JSON.stringify(credential));
+  } = await authenticateWithWebauthn(JSON.stringify(credentialData));
 
   if (authenticateWithWebauthnSuccess === "error") {
     return {

@@ -142,6 +142,13 @@
           "noSessionFound": "No session was found."
         }
       }
+    },
+    "webauthn": {
+      "getWebauthnCredential": {
+        "errorMessages": {
+          "generic": "Passkey login failed!"
+        }
+      }
     }
   },
   "components": {
