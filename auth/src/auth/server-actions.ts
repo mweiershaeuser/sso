@@ -361,6 +361,7 @@ export async function startWebauthnRegistration(): Promise<
         body: JSON.stringify({
           code,
           authenticator: "PASSKEY_AUTHENTICATOR_UNSPECIFIED",
+          domain: process.env.APP_HOST,
         }),
       },
     );
