@@ -24,19 +24,29 @@ export default function AuthFactorsForm() {
 
   return (
     <div className="mt-5">
+      {/* Primary Factors */}
+
       {availableAuthFactors.primary.find(
         (authFactor) => authFactor === PrimaryAuthFactor.WEB_AUTH_N,
       ) &&
         !authenticatedAuthFactors.primary.find(
           (authFactor) => authFactor === PrimaryAuthFactor.PASSWORD,
-        ) && <WebauthnForm />}
-      <div className="divider">{t("dividerText")}</div>
+        ) && (
+          <>
+            <WebauthnForm />
+            <div className="divider">{t("dividerText")}</div>
+          </>
+        )}
+
       {availableAuthFactors.primary.find(
         (authFactor) => authFactor === PrimaryAuthFactor.PASSWORD,
       ) &&
         !authenticatedAuthFactors.primary.find(
           (authFactor) => authFactor === PrimaryAuthFactor.PASSWORD,
         ) && <PasswordForm />}
+
+      {/* Secondary Factors */}
+
       {authenticatedAuthFactors.primary.find(
         (authFactor) => authFactor === PrimaryAuthFactor.PASSWORD,
       ) &&
