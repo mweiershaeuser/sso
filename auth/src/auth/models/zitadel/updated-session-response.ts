@@ -9,7 +9,16 @@ export default interface UpdatedSessionResponse {
   challenges: {
     webAuthN: {
       publicKeyCredentialRequestOptions: {
-        publicKey: PublicKeyCredentialRequestOptions;
+        publicKey: {
+          allowCredentials: Array<{
+            id: string;
+            type: string;
+          }>;
+          challenge: string;
+          rpId: string;
+          timeout: number;
+          userVerification: string;
+        };
       };
     };
     otpSms: string;

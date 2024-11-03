@@ -75,12 +75,12 @@ export async function webauthnLoginFlow(): Promise<ServerResponse> {
     type: createWebauthnChallengeSuccess,
     message: createWebauthnChallengeError,
     messageT: createWebauthnChallengeErrorT,
-    data: publicKeyCredentialRequestOptions,
+    data: createWebauthnChallengeData,
   } = await createWebauthnChallenge();
 
   if (
     createWebauthnChallengeSuccess === "error" ||
-    !publicKeyCredentialRequestOptions
+    !createWebauthnChallengeData
   ) {
     return {
       type: "error",
@@ -89,12 +89,12 @@ export async function webauthnLoginFlow(): Promise<ServerResponse> {
     };
   }
 
-  const parsedPublicKeyCredentialRequestOptions = (
+  const publicKeyCredentialRequestOptions = (
     PublicKeyCredential as any
-  ).parseRequestOptionsFromJSON(publicKeyCredentialRequestOptions);
+  ).parseRequestOptionsFromJSON(createWebauthnChallengeData);
 
   const credential = await getWebauthnCredential(
-    parsedPublicKeyCredentialRequestOptions,
+    publicKeyCredentialRequestOptions,
   );
 
   if (!credential) {
@@ -105,7 +105,7 @@ export async function webauthnLoginFlow(): Promise<ServerResponse> {
     type: authenticateWithWebauthnSuccess,
     message: authenticateWithWebauthnError,
     messageT: authenticateWithWebauthnErrorT,
-  } = await authenticateWithWebauthn(credential);
+  } = await authenticateWithWebauthn(JSON.stringify(credential));
 
   if (authenticateWithWebauthnSuccess === "error") {
     return {

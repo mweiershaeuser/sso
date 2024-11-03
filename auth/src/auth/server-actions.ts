@@ -446,7 +446,9 @@ export async function completeWebauthnRegistration(
 }
 
 export async function createWebauthnChallenge(): Promise<
-  ServerResponse<PublicKeyCredentialRequestOptions>
+  ServerResponse<
+    UpdatedSessionResponse["challenges"]["webAuthN"]["publicKeyCredentialRequestOptions"]["publicKey"]
+  >
 > {
   const t = await getTranslations();
 
@@ -474,7 +476,7 @@ export async function createWebauthnChallenge(): Promise<
         body: JSON.stringify({
           challenges: {
             webAuthN: {
-              domain: "localhost",
+              domain: process.env.APP_HOST,
               userVerificationRequirement:
                 "USER_VERIFICATION_REQUIREMENT_REQUIRED",
             },
@@ -526,7 +528,7 @@ export async function createWebauthnChallenge(): Promise<
 }
 
 export async function authenticateWithWebauthn(
-  credential: Credential,
+  credentialJson: string,
 ): Promise<ServerResponse> {
   const t = await getTranslations();
 
@@ -551,14 +553,14 @@ export async function authenticateWithWebauthn(
         headers: {
           Authorization: `Bearer ${process.env.ZITADEL_ACCESS_TOKEN}`,
         },
-        body: JSON.stringify({
-          checks: {
-            webAuthN: {
-              credentialAssertionData: credential,
-            },
+        body: `{
+          "checks": {
+            "webAuthN": {
+              "credentialAssertionData": ${credentialJson}
+            }
           },
-          lifetime: "2592000s",
-        }),
+          "lifetime": "2592000s"
+        }`,
       },
     );
 
