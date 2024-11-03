@@ -8,10 +8,27 @@ import {
 
 export async function createWebauthnCredential(
   publicKeyCredentialCreationOptions: PublicKeyCredentialCreationOptions,
-) {
-  return navigator.credentials.create({
-    publicKey: publicKeyCredentialCreationOptions,
-  });
+): Promise<ServerResponse<Credential>> {
+  try {
+    const credential = await navigator.credentials.create({
+      publicKey: publicKeyCredentialCreationOptions,
+    });
+
+    if (!credential) {
+      return {
+        type: "error",
+        messageT:
+          "auth.webauthn.createWebauthnCredential.errorMessages.generic",
+      };
+    }
+
+    return { type: "success", data: credential };
+  } catch (error) {
+    return {
+      type: "error",
+      messageT: "auth.webauthn.createWebauthnCredential.errorMessages.generic",
+    };
+  }
 }
 
 export async function webauthnRegistrationFlow(): Promise<ServerResponse> {
@@ -37,19 +54,29 @@ export async function webauthnRegistrationFlow(): Promise<ServerResponse> {
   const publicKeyCredentialCreationOptions: PublicKeyCredentialCreationOptions =
     (PublicKeyCredential as any).parseCreationOptionsFromJSON(creationOptions);
 
-  const credential = await createWebauthnCredential(
-    publicKeyCredentialCreationOptions,
-  );
+  const {
+    type: credentialSuccess,
+    message: credentialError,
+    messageT: credentialErrorT,
+    data: credentialData,
+  } = await createWebauthnCredential(publicKeyCredentialCreationOptions);
 
-  if (!credential) {
-    return { type: "error" };
+  if (credentialSuccess === "error" || !credentialData) {
+    return {
+      type: "error",
+      message: credentialError,
+      messageT: credentialErrorT,
+    };
   }
 
   const {
     type: completeWebauthnRegistrationSuccess,
     message: completeWebauthnRegistrationError,
     messageT: completeWebauthnRegistrationErrorT,
-  } = await completeWebauthnRegistration(passkeyId, JSON.stringify(credential));
+  } = await completeWebauthnRegistration(
+    passkeyId,
+    JSON.stringify(credentialData),
+  );
 
   if (completeWebauthnRegistrationSuccess === "error") {
     return {

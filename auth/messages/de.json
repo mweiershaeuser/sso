@@ -144,6 +144,11 @@
       }
     },
     "webauthn": {
+      "createWebauthnCredential": {
+        "errorMessages": {
+          "generic": "Passkey-Registrierung fehlgeschlagen!"
+        }
+      },
       "getWebauthnCredential": {
         "errorMessages": {
           "generic": "Passkey-Login fehlgeschlagen!"

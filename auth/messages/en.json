@@ -144,6 +144,11 @@
       }
     },
     "webauthn": {
+      "createWebauthnCredential": {
+        "errorMessages": {
+          "generic": "Passkey registration failed!"
+        }
+      },
       "getWebauthnCredential": {
         "errorMessages": {
           "generic": "Passkey login failed!"
