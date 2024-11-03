@@ -49,6 +49,10 @@
         "change-user-button-aria-label": "Benutzer:in ändern"
       },
       "AuthFactorsForm": {
+        "dividerText": "ODER",
+        "WebauthnForm": {
+          "webauthnButtonLabel": "Mit Passkey anmelden"
+        },
         "PasswordForm": {
           "required-message": {
             "icon-aria-label": "Info",
@@ -83,6 +87,11 @@
         "given-name": "Vorname",
         "family-name": "Nachname"
       }
+    },
+    "PasswordlessAuthSettings": {
+      "heading": "Passwortlose Anmeldung",
+      "registerButtonLabel": "Passkey erstellen",
+      "passkeyExistsMessage": "Es ist bereits ein Passkey hinterlegt."
     }
   },
   "auth": {
@@ -108,9 +117,41 @@
           "totpIncorrect": "Der Code ist falsch!"
         }
       },
+      "startWebauthnRegistration": {
+        "errorMessages": {
+          "noSessionFound": "Es wurde keine Session gefunden."
+        }
+      },
+      "completeWebauthnRegistration": {
+        "errorMessages": {
+          "noSessionFound": "Es wurde keine Session gefunden."
+        }
+      },
+      "createWebauthnChallenge": {
+        "errorMessages": {
+          "noSessionFound": "Es wurde keine Session gefunden."
+        }
+      },
+      "authenticateWithWebauthn": {
+        "errorMessages": {
+          "noSessionFound": "Es wurde keine Session gefunden."
+        }
+      },
       "deleteSession": {
         "errorMessages": {
           "noSessionFound": "Es wurde keine Session gefunden."
+        }
+      }
+    },
+    "webauthn": {
+      "createWebauthnCredential": {
+        "errorMessages": {
+          "generic": "Passkey-Registrierung fehlgeschlagen!"
+        }
+      },
+      "getWebauthnCredential": {
+        "errorMessages": {
+          "generic": "Passkey-Login fehlgeschlagen!"
         }
       }
     }

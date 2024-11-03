@@ -2,6 +2,7 @@ import { getAuthState } from "@/auth/server-operations";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
+import PasswordlessAuthSettings from "./_components/passwordless-auth-settings";
 import UserDetails from "./_components/user-details";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -28,6 +29,7 @@ export default async function Account() {
         {t("h1")}
       </h1>
       <UserDetails />
+      <PasswordlessAuthSettings />
     </div>
   );
 }
