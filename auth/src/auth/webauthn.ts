@@ -1,3 +1,13 @@
+import {
+  CredentialCreationOptionsJSON,
+  CredentialRequestOptionsJSON,
+} from "@github/webauthn-json/browser-ponyfill";
+import {
+  createRequestFromJSON,
+  createResponseToJSON,
+  getRequestFromJSON,
+  getResponseToJSON,
+} from "@github/webauthn-json/extended";
 import { ServerResponse } from "./models/server-response";
 import {
   authenticateWithWebauthn,
@@ -51,8 +61,21 @@ export async function webauthnRegistrationFlow(): Promise<ServerResponse> {
   }
 
   const { passkeyId, creationOptions } = startWebauthnRegistrationData;
-  const publicKeyCredentialCreationOptions: PublicKeyCredentialCreationOptions =
-    (PublicKeyCredential as any).parseCreationOptionsFromJSON(creationOptions);
+
+  let publicKeyCredentialCreationOptions: PublicKeyCredentialCreationOptions;
+
+  if (
+    typeof (PublicKeyCredential as any).parseCreationOptionsFromJSON !==
+    "undefined"
+  ) {
+    publicKeyCredentialCreationOptions = (
+      PublicKeyCredential as any
+    ).parseCreationOptionsFromJSON(creationOptions);
+  } else {
+    publicKeyCredentialCreationOptions = createRequestFromJSON({
+      publicKey: creationOptions,
+    } as CredentialCreationOptionsJSON).publicKey!;
+  }
 
   const {
     type: credentialSuccess,
@@ -69,14 +92,24 @@ export async function webauthnRegistrationFlow(): Promise<ServerResponse> {
     };
   }
 
+  let credentialJson = "{}";
+
+  if (
+    typeof (PublicKeyCredential as any).parseCreationOptionsFromJSON !==
+    "undefined"
+  ) {
+    credentialJson = JSON.stringify(credentialData);
+  } else {
+    credentialJson = JSON.stringify(
+      createResponseToJSON(credentialData as PublicKeyCredential),
+    );
+  }
+
   const {
     type: completeWebauthnRegistrationSuccess,
     message: completeWebauthnRegistrationError,
     messageT: completeWebauthnRegistrationErrorT,
-  } = await completeWebauthnRegistration(
-    passkeyId,
-    JSON.stringify(credentialData),
-  );
+  } = await completeWebauthnRegistration(passkeyId, credentialJson);
 
   if (completeWebauthnRegistrationSuccess === "error") {
     return {
@@ -132,9 +165,20 @@ export async function webauthnLoginFlow(): Promise<ServerResponse> {
     };
   }
 
-  const publicKeyCredentialRequestOptions = (
-    PublicKeyCredential as any
-  ).parseRequestOptionsFromJSON(createWebauthnChallengeData);
+  let publicKeyCredentialRequestOptions: PublicKeyCredentialRequestOptions;
+
+  if (
+    typeof (PublicKeyCredential as any).parseRequestOptionsFromJSON !==
+    "undefined"
+  ) {
+    publicKeyCredentialRequestOptions = (
+      PublicKeyCredential as any
+    ).parseRequestOptionsFromJSON(createWebauthnChallengeData);
+  } else {
+    publicKeyCredentialRequestOptions = getRequestFromJSON({
+      publicKey: createWebauthnChallengeData,
+    } as CredentialRequestOptionsJSON).publicKey!;
+  }
 
   const {
     type: credentialSuccess,
@@ -151,11 +195,24 @@ export async function webauthnLoginFlow(): Promise<ServerResponse> {
     };
   }
 
+  let credentialJson = "{}";
+
+  if (
+    typeof (PublicKeyCredential as any).parseRequestOptionsFromJSON !==
+    "undefined"
+  ) {
+    credentialJson = JSON.stringify(credentialData);
+  } else {
+    credentialJson = JSON.stringify(
+      getResponseToJSON(credentialData as PublicKeyCredential),
+    );
+  }
+
   const {
     type: authenticateWithWebauthnSuccess,
     message: authenticateWithWebauthnError,
     messageT: authenticateWithWebauthnErrorT,
-  } = await authenticateWithWebauthn(JSON.stringify(credentialData));
+  } = await authenticateWithWebauthn(credentialJson);
 
   if (authenticateWithWebauthnSuccess === "error") {
     return {
