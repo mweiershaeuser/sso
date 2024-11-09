@@ -25,6 +25,11 @@
         "heading": "Login",
         "description": "Already registered? Login now!",
         "action": "Go to login"
+      },
+      "AccountCard": {
+        "heading": "Account",
+        "description": "Manage our Account!",
+        "action": "Go to your account"
       }
     }
   },

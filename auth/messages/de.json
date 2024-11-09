@@ -25,6 +25,11 @@
         "heading": "Anmeldung",
         "description": "Bereits registriert? Jetzt anmelden!",
         "action": "Zur Anmeldung"
+      },
+      "AccountCard": {
+        "heading": "Konto",
+        "description": "Verwalte dein Konto!",
+        "action": "Zum Konto"
       }
     }
   },
