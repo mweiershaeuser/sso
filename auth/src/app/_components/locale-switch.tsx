@@ -21,12 +21,15 @@ export default function LocaleSwitch() {
   return (
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost">
-        <i
-          className="bi bi-translate"
-          aria-label={`${t("icon-aria-label")}: `}
-          role="img"
-        ></i>
-        <span aria-label={localeLanguageString}>{locale}</span>
+        <span className="whitespace-nowrap">
+          <i
+            className="bi bi-translate"
+            aria-label={`${t("icon-aria-label")}: `}
+            role="img"
+          ></i>
+          &nbsp;
+          <span aria-label={localeLanguageString}>{locale}</span>
+        </span>
       </div>
       <ul
         tabIndex={0}

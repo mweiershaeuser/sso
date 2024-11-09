@@ -7,7 +7,7 @@ export default function Footer() {
         <a
           href="https://github.com/mweiershaeuser"
           target="_blank"
-          className="hover:underline"
+          className="link link-primary"
         >
           Melvin Weiershäuser
         </a>
