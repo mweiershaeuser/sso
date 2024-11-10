@@ -5,6 +5,7 @@
       "description": "Barrierefreier Single Sign-On mit Passkey-Unterstützung"
     },
     "Header": {
+      "logoLinkTitle": "Zur Startseite",
       "LocaleSwitch": {
         "icon-aria-label": "Sprachauswahl"
       },

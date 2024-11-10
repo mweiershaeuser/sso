@@ -5,6 +5,7 @@
       "description": "Accessible Single Sign-On with Passkey-Support"
     },
     "Header": {
+      "logoLinkTitle": "Go to homepage",
       "LocaleSwitch": {
         "icon-aria-label": "Language selection"
       },
