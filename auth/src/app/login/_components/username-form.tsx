@@ -46,9 +46,9 @@ export default function UsernameForm() {
             {t("stay-logged-in-checkbox-label")}
           </span>
           <input
-            type="checkbox checkbox-primary"
+            type="checkbox"
             name="stayLoggedIn"
-            className="checkbox"
+            className="checkbox checkbox-primary"
           />
         </label>
       </div>
