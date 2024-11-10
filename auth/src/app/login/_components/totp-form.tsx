@@ -40,6 +40,7 @@ export default function TotpForm() {
         type="text"
         required
         autocomplete="one-time-code"
+        inputMode="numeric"
         formState={state}
         inputRef={totpRef}
       />
