@@ -48,7 +48,7 @@ export function TextInput({
         />
       </label>
       {formState?.errors?.[name] && (
-        <p id={`${name}Error`} className="m-0 text-error">
+        <p id={`${name}Error`} className="mt-2 mb-3 text-sm text-error">
           <i
             className="bi bi-exclamation-circle-fill"
             aria-label={`${t("errorMessageIconAriaLabel")}: `}
