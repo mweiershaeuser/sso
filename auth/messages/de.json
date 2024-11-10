@@ -51,7 +51,7 @@
         },
         "username-input-label": "Benutzername",
         "stay-logged-in-checkbox-label": "Angemeldet bleiben",
-        "submit-button-label": "Weiter"
+        "submit-button-label": "Weiter zur Anmeldung"
       },
       "UsernameDisplay": {
         "login-as": "Anmelden als",
