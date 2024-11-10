@@ -12,6 +12,9 @@
         "login-button-text": "Anmelden",
         "logout-button-text": "Abmelden"
       }
+    },
+    "Footer": {
+      "authorProfileLinkTitle": "Zum GitHub-Profil"
     }
   },
   "Home": {
@@ -64,7 +67,7 @@
             "message": "Pflichtfelder sind mit * markiert."
           },
           "password-input-label": "Passwort",
-          "submit-button-label": "Weiter"
+          "submit-button-label": "Weiter mit Passwort"
         },
         "TotpForm": {
           "required-message": {
@@ -72,7 +75,7 @@
             "message": "Pflichtfelder sind mit * markiert."
           },
           "totp-input-label": "Code",
-          "submit-button-label": "Anmelden"
+          "submit-button-label": "Mit Authenticator-Code anmelden"
         }
       }
     }

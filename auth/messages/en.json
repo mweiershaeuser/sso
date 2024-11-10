@@ -12,6 +12,9 @@
         "login-button-text": "Login",
         "logout-button-text": "Logout"
       }
+    },
+    "Footer": {
+      "authorProfileLinkTitle": "Visit the GitHub profile"
     }
   },
   "Home": {
@@ -64,7 +67,7 @@
             "message": "Required fields are marked with *."
           },
           "password-input-label": "Password",
-          "submit-button-label": "Continue"
+          "submit-button-label": "Continue with password"
         },
         "TotpForm": {
           "required-message": {
@@ -72,7 +75,7 @@
             "message": "Required fields are marked with *."
           },
           "totp-input-label": "Code",
-          "submit-button-label": "Login"
+          "submit-button-label": "Sign in with Authenticator code"
         }
       }
     }
