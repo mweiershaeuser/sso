@@ -55,7 +55,6 @@ export default function UsernameForm() {
 
       <input
         type="submit"
-        role="button"
         className="btn btn-primary mt-3"
         value={t("submit-button-label")}
       />

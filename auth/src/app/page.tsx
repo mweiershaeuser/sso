@@ -38,7 +38,7 @@ export default async function Home() {
               <h2 className="card-title">{t("Cards.LoginCard.heading")}</h2>
               <p>{t("Cards.LoginCard.description")}</p>
               <div className="card-actions justify-end">
-                <Link className="btn btn-primary" role="button" href={"login"}>
+                <Link className="btn btn-primary" href={"login"}>
                   {t("Cards.LoginCard.action")}
                 </Link>
               </div>
@@ -61,11 +61,7 @@ export default async function Home() {
               <h2 className="card-title">{t("Cards.AccountCard.heading")}</h2>
               <p>{t("Cards.AccountCard.description")}</p>
               <div className="card-actions justify-end">
-                <Link
-                  className="btn btn-primary"
-                  role="button"
-                  href={"account"}
-                >
+                <Link className="btn btn-primary" href={"account"}>
                   {t("Cards.AccountCard.action")}
                 </Link>
               </div>
