@@ -4,6 +4,7 @@
       "title": "mw auth",
       "description": "Accessible Single Sign-On with Passkey-Support"
     },
+    "skipToMainContentLink": "Skip to main content",
     "Header": {
       "logoLinkTitle": "Go to homepage",
       "LocaleSwitch": {

@@ -1,3 +1,4 @@
+import SkipLink from "@/components/common/skip-link";
 import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
@@ -43,6 +44,8 @@ export default async function RootLayout({
   const locale = await getLocale();
   const messages = await getMessages();
 
+  const t = await getTranslations("RootLayout");
+
   return (
     <html lang={locale} data-theme="mw_auth">
       <body
@@ -50,6 +53,7 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <StoreProvider>
+            <SkipLink label={t("skipToMainContentLink")} href="#main-content" />
             <Toaster
               position="top-center"
               toastOptions={{
@@ -83,7 +87,10 @@ export default async function RootLayout({
             <div className="w-full p-4">
               <Header />
             </div>
-            <main className="grow flex flex-col min-w-full max-w-full prose prose-headings:font-display">
+            <main
+              id="main-content"
+              className="grow flex flex-col min-w-full max-w-full prose prose-headings:font-display"
+            >
               {children}
             </main>
             <div className="w-full p-4">

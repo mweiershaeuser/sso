@@ -4,6 +4,7 @@
       "title": "mw auth",
       "description": "Barrierefreier Single Sign-On mit Passkey-Unterstützung"
     },
+    "skipToMainContentLink": "Zum Hauptinhalt springen",
     "Header": {
       "logoLinkTitle": "Zur Startseite",
       "LocaleSwitch": {
