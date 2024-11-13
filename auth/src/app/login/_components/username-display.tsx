@@ -13,8 +13,8 @@ export default function UsernameDisplay() {
   return (
     <>
       <p className="mb-2">{t("login-as")}:</p>
-      <div className="flex items-center justify-between bg-base-100 rounded-lg shadow p-4">
-        <div className="flex items-center gap-5">
+      <div className="flex items-center justify-between bg-base-100 rounded-lg shadow p-4 gap-3">
+        <div className="flex items-center gap-3">
           <div className="avatar placeholder">
             <div className="bg-neutral text-neutral-content w-12 h-12 rounded-full">
               <span className="text-lg">
@@ -24,13 +24,13 @@ export default function UsernameDisplay() {
             </div>
           </div>
           <div>
-            <p className="text-2xl m-0">{`${givenName} ${familyName}`}</p>
+            <p className="font-bold m-0">{`${givenName} ${familyName}`}</p>
             <p className="italic m-0">{username}</p>
           </div>
         </div>
         <div>
           <button
-            className="btn btn-circle btn-outline"
+            className="btn btn-circle btn-outline btn-primary"
             onClick={() => deleteSession()}
           >
             <i

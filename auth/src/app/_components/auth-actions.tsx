@@ -88,7 +88,7 @@ export default function AuthActions({
           : t("logout-button-text")}
       </button>
       {authState?.loggedIn && (
-        <div className="avatar placeholder ml-2">
+        <div className="avatar placeholder">
           <div className="bg-neutral text-neutral-content w-12 rounded-full">
             <span className="text-lg">
               {user?.givenName[0]?.toUpperCase()}

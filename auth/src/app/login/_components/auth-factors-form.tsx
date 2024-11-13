@@ -28,15 +28,12 @@ export default function AuthFactorsForm() {
 
       {availableAuthFactors.primary.find(
         (authFactor) => authFactor === PrimaryAuthFactor.WEB_AUTH_N,
-      ) &&
-        !authenticatedAuthFactors.primary.find(
-          (authFactor) => authFactor === PrimaryAuthFactor.PASSWORD,
-        ) && (
-          <>
-            <WebauthnForm />
-            <div className="divider">{t("dividerText")}</div>
-          </>
-        )}
+      ) && (
+        <>
+          <WebauthnForm />
+          <div className="divider">{t("dividerText")}</div>
+        </>
+      )}
 
       {availableAuthFactors.primary.find(
         (authFactor) => authFactor === PrimaryAuthFactor.PASSWORD,

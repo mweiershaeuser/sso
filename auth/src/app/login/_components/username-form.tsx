@@ -46,16 +46,15 @@ export default function UsernameForm() {
             {t("stay-logged-in-checkbox-label")}
           </span>
           <input
-            type="checkbox checkbox-primary"
+            type="checkbox"
             name="stayLoggedIn"
-            className="checkbox"
+            className="checkbox checkbox-primary"
           />
         </label>
       </div>
 
       <input
         type="submit"
-        role="button"
         className="btn btn-primary mt-3"
         value={t("submit-button-label")}
       />

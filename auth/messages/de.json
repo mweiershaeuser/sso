@@ -4,7 +4,9 @@
       "title": "mw auth",
       "description": "Barrierefreier Single Sign-On mit Passkey-Unterstützung"
     },
+    "skipToMainContentLink": "Zum Hauptinhalt springen",
     "Header": {
+      "logoLinkTitle": "Zur Startseite",
       "LocaleSwitch": {
         "icon-aria-label": "Sprachauswahl"
       },
@@ -12,6 +14,9 @@
         "login-button-text": "Anmelden",
         "logout-button-text": "Abmelden"
       }
+    },
+    "Footer": {
+      "authorProfileLinkTitle": "Zum GitHub-Profil"
     }
   },
   "Home": {
@@ -25,6 +30,11 @@
         "heading": "Anmeldung",
         "description": "Bereits registriert? Jetzt anmelden!",
         "action": "Zur Anmeldung"
+      },
+      "AccountCard": {
+        "heading": "Konto",
+        "description": "Verwalte dein Konto!",
+        "action": "Zum Konto"
       }
     }
   },
@@ -42,7 +52,7 @@
         },
         "username-input-label": "Benutzername",
         "stay-logged-in-checkbox-label": "Angemeldet bleiben",
-        "submit-button-label": "Weiter"
+        "submit-button-label": "Weiter zur Anmeldung"
       },
       "UsernameDisplay": {
         "login-as": "Anmelden als",
@@ -59,7 +69,7 @@
             "message": "Pflichtfelder sind mit * markiert."
           },
           "password-input-label": "Passwort",
-          "submit-button-label": "Weiter"
+          "submit-button-label": "Weiter mit Passwort"
         },
         "TotpForm": {
           "required-message": {
@@ -67,7 +77,7 @@
             "message": "Pflichtfelder sind mit * markiert."
           },
           "totp-input-label": "Code",
-          "submit-button-label": "Anmelden"
+          "submit-button-label": "Mit Authenticator-Code anmelden"
         }
       }
     }

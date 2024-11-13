@@ -40,13 +40,13 @@ export default function TotpForm() {
         type="text"
         required
         autocomplete="one-time-code"
+        inputMode="numeric"
         formState={state}
         inputRef={totpRef}
       />
 
       <input
         type="submit"
-        role="button"
         className="btn btn-primary mt-3"
         value={t("submit-button-label")}
       />

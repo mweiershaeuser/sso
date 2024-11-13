@@ -12,6 +12,7 @@ export function TextInput({
   type = "text",
   required = false,
   autocomplete,
+  inputMode = "text",
   formState,
   inputRef,
 }: {
@@ -20,6 +21,15 @@ export function TextInput({
   type?: Extract<HTMLInputTypeAttribute, "text" | "password">;
   required?: boolean;
   autocomplete?: HTMLInputAutoCompleteAttribute;
+  inputMode?:
+    | "none"
+    | "text"
+    | "tel"
+    | "url"
+    | "email"
+    | "numeric"
+    | "decimal"
+    | "search";
   formState?: ServerResponse;
   inputRef?: RefObject<HTMLInputElement>;
 }) {
@@ -42,13 +52,14 @@ export function TextInput({
           ref={inputRef}
           className={`input input-primary input-bordered ${formState?.errors?.[name] && "input-error"}`}
           autoComplete={autocomplete}
+          inputMode={inputMode}
           aria-required={required}
           aria-invalid={!!formState?.errors?.[name]}
           aria-describedby={`${name}Error`}
         />
       </label>
       {formState?.errors?.[name] && (
-        <p id={`${name}Error`} className="m-0 text-error">
+        <p id={`${name}Error`} className="mt-2 mb-3 text-sm text-error">
           <i
             className="bi bi-exclamation-circle-fill"
             aria-label={`${t("errorMessageIconAriaLabel")}: `}

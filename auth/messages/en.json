@@ -4,7 +4,9 @@
       "title": "mw auth",
       "description": "Accessible Single Sign-On with Passkey-Support"
     },
+    "skipToMainContentLink": "Skip to main content",
     "Header": {
+      "logoLinkTitle": "Go to homepage",
       "LocaleSwitch": {
         "icon-aria-label": "Language selection"
       },
@@ -12,6 +14,9 @@
         "login-button-text": "Login",
         "logout-button-text": "Logout"
       }
+    },
+    "Footer": {
+      "authorProfileLinkTitle": "Visit the GitHub profile"
     }
   },
   "Home": {
@@ -25,6 +30,11 @@
         "heading": "Login",
         "description": "Already registered? Login now!",
         "action": "Go to login"
+      },
+      "AccountCard": {
+        "heading": "Account",
+        "description": "Manage our Account!",
+        "action": "Go to your account"
       }
     }
   },
@@ -42,7 +52,7 @@
         },
         "username-input-label": "Username",
         "stay-logged-in-checkbox-label": "Stay logged in",
-        "submit-button-label": "Continue"
+        "submit-button-label": "Continue with login"
       },
       "UsernameDisplay": {
         "login-as": "Login as",
@@ -59,7 +69,7 @@
             "message": "Required fields are marked with *."
           },
           "password-input-label": "Password",
-          "submit-button-label": "Continue"
+          "submit-button-label": "Continue with password"
         },
         "TotpForm": {
           "required-message": {
@@ -67,7 +77,7 @@
             "message": "Required fields are marked with *."
           },
           "totp-input-label": "Code",
-          "submit-button-label": "Login"
+          "submit-button-label": "Sign in with Authenticator code"
         }
       }
     }
