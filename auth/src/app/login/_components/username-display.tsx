@@ -13,8 +13,8 @@ export default function UsernameDisplay() {
   return (
     <>
       <p className="mb-2">{t("login-as")}:</p>
-      <div className="flex items-center justify-between bg-base-100 rounded-lg shadow p-4 gap-3">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-center justify-between bg-base-100 rounded-lg shadow p-4 gap-3">
+        <div className="flex flex-col sm:flex-row items-center gap-3">
           <div className="avatar placeholder">
             <div className="bg-neutral text-neutral-content w-12 h-12 rounded-full">
               <span className="text-lg">
@@ -24,8 +24,8 @@ export default function UsernameDisplay() {
             </div>
           </div>
           <div>
-            <p className="font-bold m-0">{`${givenName} ${familyName}`}</p>
-            <p className="italic m-0">{username}</p>
+            <p className="font-bold m-0 text-center sm:text-left">{`${givenName} ${familyName}`}</p>
+            <p className="italic m-0  text-center sm:text-left">{username}</p>
           </div>
         </div>
         <div>
