@@ -66,7 +66,7 @@ export default function Menu() {
             ></i>
           </button>
         </div>
-        <Nav vertical textBold textSize="text-5xl" navCallback={closeMenu} />
+        <Nav vertical textBold textSize="text-4xl" navCallback={closeMenu} />
         <div className="divider mt-10 mb-3"></div>
         <div className="flex justify-between flex-wrap">
           <div className="flex gap-3 flex-wrap">
