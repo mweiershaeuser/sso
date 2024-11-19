@@ -1,12 +1,14 @@
 "use client";
 
 import { deleteSession } from "@/auth/server-actions";
+import Avatar from "@/components/user/avatar";
 import { useAppSelector } from "@/store/hooks";
 import { selectUser } from "@/store/user/userSlice";
 import { useTranslations } from "next-intl";
 
 export default function UsernameDisplay() {
-  const { username, givenName, familyName } = useAppSelector(selectUser);
+  const user = useAppSelector(selectUser);
+  const { username, givenName, familyName } = user;
 
   const t = useTranslations("Login.LoginForm.UsernameDisplay");
 
@@ -15,14 +17,7 @@ export default function UsernameDisplay() {
       <p className="mb-2">{t("login-as")}:</p>
       <div className="flex flex-col sm:flex-row items-center justify-between bg-base-100 rounded-lg shadow p-4 gap-3">
         <div className="flex flex-col sm:flex-row items-center gap-3">
-          <div className="avatar placeholder">
-            <div className="bg-neutral text-neutral-content w-12 h-12 rounded-full">
-              <span className="text-lg">
-                {givenName[0]?.toUpperCase()}
-                {familyName[0]?.toUpperCase()}
-              </span>
-            </div>
-          </div>
+          <Avatar user={user} />
           <div>
             <p className="font-bold m-0 text-center sm:text-left">{`${givenName} ${familyName}`}</p>
             <p className="italic m-0  text-center sm:text-left">{username}</p>

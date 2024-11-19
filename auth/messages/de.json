@@ -10,9 +10,10 @@
       "LocaleSwitch": {
         "icon-aria-label": "Sprachauswahl"
       },
-      "Auth": {
-        "login-button-text": "Anmelden",
-        "logout-button-text": "Abmelden"
+      "Menu": {
+        "logoLinkTitle": "Zur Startseite",
+        "openMenuIconLabel": "Menü öffnen",
+        "closeMenuIconLabel": "Menü schließen"
       }
     },
     "Footer": {
@@ -167,9 +168,30 @@
     }
   },
   "components": {
+    "common": {
+      "Nav": {
+        "links": {
+          "home": "Start",
+          "login": "Anmeldung",
+          "account": "Konto"
+        }
+      }
+    },
+    "auth": {
+      "LoginLogoutButton": {
+        "loginButtonText": "Anmelden",
+        "logoutButtonText": "Abmelden"
+      }
+    },
     "form": {
       "TextInput": {
         "errorMessageIconAriaLabel": "Fehler"
+      }
+    },
+    "user": {
+      "Avatar": {
+        "userInitialsLabel": "Aktueller Benutzer:",
+        "userIconLabel": "Kein Benutzer"
       }
     }
   },

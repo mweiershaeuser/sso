@@ -10,9 +10,10 @@
       "LocaleSwitch": {
         "icon-aria-label": "Language selection"
       },
-      "Auth": {
-        "login-button-text": "Login",
-        "logout-button-text": "Logout"
+      "Menu": {
+        "logoLinkTitle": "Go to homepage",
+        "openMenuIconLabel": "Open menu",
+        "closeMenuIconLabel": "Close menu"
       }
     },
     "Footer": {
@@ -167,9 +168,30 @@
     }
   },
   "components": {
+    "common": {
+      "Nav": {
+        "links": {
+          "home": "Home",
+          "login": "Login",
+          "account": "Account"
+        }
+      }
+    },
+    "auth": {
+      "LoginLogoutButton": {
+        "loginButtonText": "Login",
+        "logoutButtonText": "Logout"
+      }
+    },
     "form": {
       "TextInput": {
         "errorMessageIconAriaLabel": "Error"
+      }
+    },
+    "user": {
+      "Avatar": {
+        "userInitialsLabel": "Current user:",
+        "userIconLabel": "User not logged in"
       }
     }
   },
