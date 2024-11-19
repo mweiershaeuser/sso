@@ -1,9 +1,9 @@
 "use client";
 
 import { Locale, locales, localeToLanguageMap } from "@/i18n/models/locale";
-import { initialiseLocale, setLocale } from "@/i18n/server-actions";
+import { setLocale } from "@/i18n/server-actions";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
 export default function LocaleSwitch() {
   const locale = useLocale();
@@ -13,10 +13,6 @@ export default function LocaleSwitch() {
     () => localeToLanguageMap.get(locale as Locale),
     [locale],
   );
-
-  useEffect(() => {
-    initialiseLocale();
-  }, []);
 
   return (
     <div className="dropdown">
@@ -28,7 +24,7 @@ export default function LocaleSwitch() {
             role="img"
           ></i>
           &nbsp;
-          <span aria-label={localeLanguageString}>{locale}</span>
+          <span>{localeLanguageString}</span>
         </span>
       </div>
       <ul
@@ -37,11 +33,8 @@ export default function LocaleSwitch() {
       >
         {locales.map((locale) => (
           <li key={locale}>
-            <button
-              aria-label={localeToLanguageMap.get(locale)}
-              onClick={() => setLocale(locale)}
-            >
-              {locale}
+            <button onClick={() => setLocale(locale)}>
+              {localeToLanguageMap.get(locale)}
             </button>
           </li>
         ))}

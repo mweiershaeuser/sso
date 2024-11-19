@@ -2,6 +2,7 @@
 
 import LoginLogoutButton from "@/components/auth/login-logout-button";
 import Logo from "@/components/common/logo";
+import LocaleSwitch from "@/components/i18n/locale-switch";
 import Avatar from "@/components/user/avatar";
 import { useAppSelector } from "@/store/hooks";
 import { selectUser } from "@/store/user/userSlice";
@@ -42,9 +43,9 @@ export default function Menu() {
       </button>
       <dialog
         ref={dialogRef}
-        className="min-w-full min-h-full m-0 p-6 open:flex flex-col gap-10"
+        className="min-w-full min-h-full m-0 p-6 open:flex flex-col"
       >
-        <div className="flex justify-between">
+        <div className="flex justify-between mb-10">
           <Link
             href="/"
             className="btn btn-ghost"
@@ -65,12 +66,14 @@ export default function Menu() {
             ></i>
           </button>
         </div>
-
         <Nav vertical textBold textSize="text-5xl" navCallback={closeMenu} />
-        <div className="divider my-10"></div>
-        <div className="flex gap-3">
-          <Avatar user={user} />
-          <LoginLogoutButton buttonCallback={closeMenu} />
+        <div className="divider mt-10 mb-3"></div>
+        <div className="flex justify-between flex-wrap">
+          <div className="flex gap-3 flex-wrap">
+            <Avatar user={user} />
+            <LoginLogoutButton buttonCallback={closeMenu} />
+          </div>
+          <LocaleSwitch />
         </div>
       </dialog>
     </>
