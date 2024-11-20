@@ -1,9 +1,10 @@
+import FooterNav from "@/components/common/footer-nav";
 import { useTranslations } from "next-intl";
 
 export default function Footer() {
   const t = useTranslations("RootLayout.Footer");
   return (
-    <footer className="footer w-full rounded-lg p-4 flex justify-center bg-base-200 text-base-content">
+    <footer className="footer w-full rounded-lg p-4 flex flex-col md:flex-row md:justify-between items-center bg-base-200 text-base-content">
       <span className="inline" lang="en">
         Copyright © {new Date().getFullYear()} - made with{" "}
         <i className="bi bi-heart-fill" aria-label="love" role="img"></i> by{" "}
@@ -16,6 +17,7 @@ export default function Footer() {
           Melvin Weiershäuser
         </a>
       </span>
+      <FooterNav />
     </footer>
   );
 }

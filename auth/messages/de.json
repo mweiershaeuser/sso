@@ -39,6 +39,31 @@
       }
     }
   },
+  "legal": {
+    "Imprint": {
+      "metadata": {
+        "title": "Impressum - mw auth",
+        "description": "Barrierefreier Single Sign-On mit Passkey-Unterstützung"
+      },
+      "h1": "Impressum",
+      "langInfoIconAriaLabel": "Info",
+      "langInfoMessage": "Der folgende Text ist im Moment leider nur in deutscher Sprache verfügbar."
+    },
+    "Sitemap": {
+      "metadata": {
+        "title": "Sitemap - mw auth",
+        "description": "Barrierefreier Single Sign-On mit Passkey-Unterstützung"
+      },
+      "h1": "Sitemap",
+      "links": {
+        "home": "Start",
+        "login": "Anmeldung (leitet zum Konto weiter, wenn angemeldet)",
+        "account": "Konto (leitet zur Anmeldung weiter, wenn nicht angemeldet)",
+        "imprint": "Impressum",
+        "sitemap": "Sitemap"
+      }
+    }
+  },
   "Login": {
     "metadata": {
       "title": "Anmeldung - mw auth",
@@ -170,10 +195,18 @@
   "components": {
     "common": {
       "Nav": {
+        "navAriaLabel": "Hauptnavigation",
         "links": {
           "home": "Start",
           "login": "Anmeldung",
           "account": "Konto"
+        }
+      },
+      "FooterNav": {
+        "navAriaLabel": "Footer-Navigation",
+        "links": {
+          "imprint": "Impressum",
+          "sitemap": "Sitemap"
         }
       }
     },

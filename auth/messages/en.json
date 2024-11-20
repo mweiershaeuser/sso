@@ -39,6 +39,31 @@
       }
     }
   },
+  "legal": {
+    "Imprint": {
+      "metadata": {
+        "title": "Imprint - mw auth",
+        "description": "Accessible Single Sign-On with Passkey-Support"
+      },
+      "h1": "Imprint",
+      "langInfoIconAriaLabel": "Info",
+      "langInfoMessage": "At the moment, the following text is unfortunately only available in German."
+    },
+    "Sitemap": {
+      "metadata": {
+        "title": "Sitemap - mw auth",
+        "description": "Accessible Single Sign-On with Passkey-Support"
+      },
+      "h1": "Sitemap",
+      "links": {
+        "home": "Home",
+        "login": "Login (redirects to Account, if logged in)",
+        "account": "Account (redirects to Login, if not logged in)",
+        "imprint": "Imprint",
+        "sitemap": "Sitemap"
+      }
+    }
+  },
   "Login": {
     "metadata": {
       "title": "Login - mw auth",
@@ -170,10 +195,18 @@
   "components": {
     "common": {
       "Nav": {
+        "navAriaLabel": "Main Navigation",
         "links": {
           "home": "Home",
           "login": "Login",
           "account": "Account"
+        }
+      },
+      "FooterNav": {
+        "navAriaLabel": "Footer Navigation",
+        "links": {
+          "imprint": "Imprint",
+          "sitemap": "Sitemap"
         }
       }
     },
