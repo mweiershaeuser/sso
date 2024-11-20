@@ -1,4 +1,5 @@
 import { getAuthState } from "@/auth/server-operations";
+import LoginLogoutButton from "@/components/auth/login-logout-button";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
@@ -30,6 +31,8 @@ export default async function Account() {
       </h1>
       <UserDetails />
       <PasswordlessAuthSettings />
+      <div className="divider"></div>
+      <LoginLogoutButton />
     </div>
   );
 }
