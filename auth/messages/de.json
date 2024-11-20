@@ -195,10 +195,18 @@
   "components": {
     "common": {
       "Nav": {
+        "navAriaLabel": "Hauptnavigation",
         "links": {
           "home": "Start",
           "login": "Anmeldung",
           "account": "Konto"
+        }
+      },
+      "FooterNav": {
+        "navAriaLabel": "Footer-Navigation",
+        "links": {
+          "imprint": "Impressum",
+          "sitemap": "Sitemap"
         }
       }
     },

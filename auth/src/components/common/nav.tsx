@@ -21,7 +21,7 @@ export default function Nav({
   const { loggedIn } = useAppSelector(selectAuth);
 
   return (
-    <nav>
+    <nav aria-label={t("navAriaLabel")}>
       <ul
         className={`font-display ${textBold ? "font-bold" : ""} ${textSize} flex ${vertical ? "flex-col" : "flex-row"} gap-5`}
       >
