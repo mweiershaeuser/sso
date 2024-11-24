@@ -8,7 +8,7 @@ import { useAppSelector } from "@/store/hooks";
 import { selectUser } from "@/store/user/userSlice";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import Nav from "../../components/common/nav";
 
 export default function Menu() {
@@ -27,6 +27,22 @@ export default function Menu() {
     dialogRef.current?.close();
     menuButton.current?.focus();
   }, []);
+
+  const checkViewportChange = useCallback(
+    (isInDesktopModeEvent: MediaQueryListEvent) => {
+      if (isInDesktopModeEvent.matches) {
+        closeMenu();
+      }
+    },
+    [closeMenu],
+  );
+
+  useEffect(() => {
+    const isInDesktopModeQuery = window.matchMedia("(min-width: 768px)");
+    isInDesktopModeQuery.addEventListener("change", checkViewportChange);
+    return () =>
+      isInDesktopModeQuery.removeEventListener("change", checkViewportChange);
+  }, [checkViewportChange]);
 
   return (
     <>
