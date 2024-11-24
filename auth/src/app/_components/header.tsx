@@ -1,9 +1,9 @@
 import Logo from "@/components/common/logo";
+import LocaleSwitch from "@/components/i18n/locale-switch";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Nav from "../../components/common/nav";
 import AuthWrapper from "./auth-wrapper";
-import LocaleWrapper from "./locale-wrapper";
 import Menu from "./menu";
 
 export default function Header() {
@@ -21,7 +21,9 @@ export default function Header() {
       </div>
       <div className="navbar-center flex-wrap"></div>
       <div className="navbar-end flex gap-3 flex-wrap">
-        <LocaleWrapper />
+        <div className="hidden md:flex">
+          <LocaleSwitch />
+        </div>
         <AuthWrapper />
         <div className="block md:hidden">
           <Menu />
