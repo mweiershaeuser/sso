@@ -102,7 +102,8 @@
             "icon-aria-label": "Info",
             "message": "Required fields are marked with *."
           },
-          "totp-input-label": "Code",
+          "totp-input-label": "Authenticator code",
+          "totp-input-description": "Open authenticator app to obtain the code.",
           "submit-button-label": "Sign in with Authenticator code"
         }
       }
@@ -218,7 +219,8 @@
     },
     "form": {
       "TextInput": {
-        "errorMessageIconAriaLabel": "Error"
+        "errorMessageIconAriaLabel": "Error",
+        "descriptionIconAriaLabel": "Hint"
       }
     },
     "user": {

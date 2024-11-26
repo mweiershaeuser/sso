@@ -102,7 +102,8 @@
             "icon-aria-label": "Info",
             "message": "Pflichtfelder sind mit * markiert."
           },
-          "totp-input-label": "Code",
+          "totp-input-label": "Authenticator-Code",
+          "totp-input-description": "Authenticator-App öffnen, um den Code einzusehen.",
           "submit-button-label": "Mit Authenticator-Code anmelden"
         }
       }
@@ -218,7 +219,8 @@
     },
     "form": {
       "TextInput": {
-        "errorMessageIconAriaLabel": "Fehler"
+        "errorMessageIconAriaLabel": "Fehler",
+        "descriptionIconAriaLabel": "Hinweis"
       }
     },
     "user": {

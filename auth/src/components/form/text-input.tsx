@@ -9,6 +9,7 @@ import {
 export function TextInput({
   name,
   label,
+  description,
   type = "text",
   required = false,
   autocomplete,
@@ -18,6 +19,7 @@ export function TextInput({
 }: {
   name: string;
   label: string;
+  description?: string;
   type?: Extract<HTMLInputTypeAttribute, "text" | "password">;
   required?: boolean;
   autocomplete?: HTMLInputAutoCompleteAttribute;
@@ -55,19 +57,34 @@ export function TextInput({
           inputMode={inputMode}
           aria-required={required}
           aria-invalid={!!formState?.errors?.[name]}
-          aria-describedby={`${name}Error`}
+          aria-describedby={`${name}Description ${name}Error`}
         />
       </label>
-      {formState?.errors?.[name] && (
-        <p id={`${name}Error`} className="mt-2 mb-3 text-sm text-error">
+      {!!description && (
+        <p id={`${name}Description`} className="mt-1 mb-2 px-1 text-sm">
           <i
-            className="bi bi-exclamation-circle-fill"
-            aria-label={`${t("errorMessageIconAriaLabel")}: `}
+            className="bi bi-info-circle-fill"
+            aria-label={`${t("descriptionIconAriaLabel")}: `}
             role="img"
           ></i>{" "}
-          {formState?.errors?.[name]}
+          {description}
         </p>
       )}
+      <div aria-live="polite">
+        {formState?.errors?.[name] && (
+          <p
+            id={`${name}Error`}
+            className={`${!description ? "mt-1" : "mt-0"} mb-2 px-1 text-sm text-error`}
+          >
+            <i
+              className="bi bi-exclamation-circle-fill"
+              aria-label={`${t("errorMessageIconAriaLabel")}: `}
+              role="img"
+            ></i>{" "}
+            {formState?.errors?.[name]}
+          </p>
+        )}
+      </div>
     </>
   );
 }

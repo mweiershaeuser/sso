@@ -37,6 +37,7 @@ export default function TotpForm() {
       <TextInput
         name={"totp"}
         label={t("totp-input-label")}
+        description={t("totp-input-description")}
         type="text"
         required
         autocomplete="one-time-code"
