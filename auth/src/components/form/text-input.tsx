@@ -43,7 +43,7 @@ export function TextInput({
             className={`label-text ${formState?.errors?.[name] && "text-error"}`}
           >
             {label}
-            {required && <span aria-hidden> *</span>}
+            {required && <span> *</span>}
           </span>
         </div>
         <input

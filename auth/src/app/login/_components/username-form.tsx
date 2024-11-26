@@ -22,7 +22,7 @@ export default function UsernameForm() {
 
   return (
     <form action={formAction} className="flex flex-col">
-      <p aria-hidden>
+      <p>
         <i
           className="bi bi-info-circle-fill"
           aria-label={`${t("required-message.icon-aria-label")}: `}
