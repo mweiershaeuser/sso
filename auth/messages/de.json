@@ -7,9 +7,6 @@
     "skipToMainContentLink": "Zum Hauptinhalt springen",
     "Header": {
       "logoLinkTitle": "Zur Startseite",
-      "LocaleSwitch": {
-        "icon-aria-label": "Sprachauswahl"
-      },
       "Menu": {
         "logoLinkTitle": "Zur Startseite",
         "openMenuIconLabel": "Menü öffnen",
@@ -102,7 +99,8 @@
             "icon-aria-label": "Info",
             "message": "Pflichtfelder sind mit * markiert."
           },
-          "totp-input-label": "Code",
+          "totp-input-label": "Authenticator-Code",
+          "totp-input-description": "Authenticator-App öffnen, um den Code einzusehen.",
           "submit-button-label": "Mit Authenticator-Code anmelden"
         }
       }
@@ -208,6 +206,9 @@
           "imprint": "Impressum",
           "sitemap": "Sitemap"
         }
+      },
+      "Dialog": {
+        "closeIconLabel": "Dialog schließen"
       }
     },
     "auth": {
@@ -218,7 +219,13 @@
     },
     "form": {
       "TextInput": {
-        "errorMessageIconAriaLabel": "Fehler"
+        "errorMessageIconAriaLabel": "Fehler",
+        "descriptionIconAriaLabel": "Hinweis"
+      }
+    },
+    "i18n": {
+      "LocaleSwitch": {
+        "icon-aria-label": "Sprachauswahl"
       }
     },
     "user": {

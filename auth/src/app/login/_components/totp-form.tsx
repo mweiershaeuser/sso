@@ -25,7 +25,7 @@ export default function TotpForm() {
 
   return (
     <form action={formAction} className="flex flex-col">
-      <p aria-hidden>
+      <p>
         <i
           className="bi bi-info-circle-fill"
           aria-label={`${t("required-message.icon-aria-label")}: `}
@@ -37,6 +37,7 @@ export default function TotpForm() {
       <TextInput
         name={"totp"}
         label={t("totp-input-label")}
+        description={t("totp-input-description")}
         type="text"
         required
         autocomplete="one-time-code"

@@ -7,9 +7,6 @@
     "skipToMainContentLink": "Skip to main content",
     "Header": {
       "logoLinkTitle": "Go to homepage",
-      "LocaleSwitch": {
-        "icon-aria-label": "Language selection"
-      },
       "Menu": {
         "logoLinkTitle": "Go to homepage",
         "openMenuIconLabel": "Open menu",
@@ -102,7 +99,8 @@
             "icon-aria-label": "Info",
             "message": "Required fields are marked with *."
           },
-          "totp-input-label": "Code",
+          "totp-input-label": "Authenticator code",
+          "totp-input-description": "Open authenticator app to obtain the code.",
           "submit-button-label": "Sign in with Authenticator code"
         }
       }
@@ -208,6 +206,9 @@
           "imprint": "Imprint",
           "sitemap": "Sitemap"
         }
+      },
+      "Dialog": {
+        "closeIconLabel": "Close dialog"
       }
     },
     "auth": {
@@ -218,7 +219,13 @@
     },
     "form": {
       "TextInput": {
-        "errorMessageIconAriaLabel": "Error"
+        "errorMessageIconAriaLabel": "Error",
+        "descriptionIconAriaLabel": "Hint"
+      }
+    },
+    "i18n": {
+      "LocaleSwitch": {
+        "icon-aria-label": "Language selection"
       }
     },
     "user": {
