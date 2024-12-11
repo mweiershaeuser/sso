@@ -2,7 +2,6 @@
 
 import LoginLogoutButton from "@/components/auth/login-logout-button";
 import Logo from "@/components/common/logo";
-import LocaleSwitch from "@/components/i18n/locale-switch";
 import Avatar from "@/components/user/avatar";
 import { useAppSelector } from "@/store/hooks";
 import { selectUser } from "@/store/user/userSlice";
@@ -89,7 +88,6 @@ export default function Menu() {
             <Avatar user={user} />
             <LoginLogoutButton buttonCallback={closeMenu} />
           </div>
-          <LocaleSwitch />
         </div>
       </dialog>
     </>

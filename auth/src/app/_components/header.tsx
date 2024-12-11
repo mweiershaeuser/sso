@@ -20,10 +20,8 @@ export default function Header() {
         </div>
       </div>
       <div className="navbar-center flex-wrap"></div>
-      <div className="navbar-end flex gap-3 flex-wrap">
-        <div className="hidden md:flex">
-          <LocaleSwitch />
-        </div>
+      <div className="navbar-end flex md:gap-3 flex-wrap">
+        <LocaleSwitch />
         <AuthWrapper />
         <div className="block md:hidden">
           <Menu />

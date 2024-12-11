@@ -7,9 +7,6 @@
     "skipToMainContentLink": "Skip to main content",
     "Header": {
       "logoLinkTitle": "Go to homepage",
-      "LocaleSwitch": {
-        "icon-aria-label": "Language selection"
-      },
       "Menu": {
         "logoLinkTitle": "Go to homepage",
         "openMenuIconLabel": "Open menu",
@@ -209,6 +206,9 @@
           "imprint": "Imprint",
           "sitemap": "Sitemap"
         }
+      },
+      "Dialog": {
+        "closeIconLabel": "Close dialog"
       }
     },
     "auth": {
@@ -221,6 +221,11 @@
       "TextInput": {
         "errorMessageIconAriaLabel": "Error",
         "descriptionIconAriaLabel": "Hint"
+      }
+    },
+    "i18n": {
+      "LocaleSwitch": {
+        "icon-aria-label": "Language selection"
       }
     },
     "user": {

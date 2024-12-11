@@ -7,9 +7,6 @@
     "skipToMainContentLink": "Zum Hauptinhalt springen",
     "Header": {
       "logoLinkTitle": "Zur Startseite",
-      "LocaleSwitch": {
-        "icon-aria-label": "Sprachauswahl"
-      },
       "Menu": {
         "logoLinkTitle": "Zur Startseite",
         "openMenuIconLabel": "Menü öffnen",
@@ -209,6 +206,9 @@
           "imprint": "Impressum",
           "sitemap": "Sitemap"
         }
+      },
+      "Dialog": {
+        "closeIconLabel": "Dialog schließen"
       }
     },
     "auth": {
@@ -221,6 +221,11 @@
       "TextInput": {
         "errorMessageIconAriaLabel": "Fehler",
         "descriptionIconAriaLabel": "Hinweis"
+      }
+    },
+    "i18n": {
+      "LocaleSwitch": {
+        "icon-aria-label": "Sprachauswahl"
       }
     },
     "user": {
