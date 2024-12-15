@@ -113,9 +113,13 @@ export async function getAuthStateFromSession(
     (authState.authenticatedAuthFactors.primary.includes(
       PrimaryAuthFactor.PASSWORD,
     ) &&
-      authState.authenticatedAuthFactors.secondary.includes(
+      (authState.availableAuthFactors.secondary.includes(
         SecondaryAuthFactor.TOTP,
-      ))
+      )
+        ? authState.authenticatedAuthFactors.secondary.includes(
+            SecondaryAuthFactor.TOTP,
+          )
+        : true))
   ) {
     authState.loggedIn = true;
   }

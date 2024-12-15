@@ -15,6 +15,10 @@
     },
     "Footer": {
       "authorProfileLinkTitle": "Zum GitHub-Profil"
+    },
+    "LoginLogoutDialogs": {
+      "loginDialogMessage": "Anmeldung erfolgreich!",
+      "logoutDialogMessage": "Abmeldung erfolgreich!"
     }
   },
   "Home": {
@@ -43,7 +47,6 @@
         "description": "Barrierefreier Single Sign-On mit Passkey-Unterstützung"
       },
       "h1": "Impressum",
-      "langInfoIconAriaLabel": "Info",
       "langInfoMessage": "Der folgende Text ist im Moment leider nur in deutscher Sprache verfügbar."
     },
     "Sitemap": {
@@ -192,6 +195,14 @@
   },
   "components": {
     "common": {
+      "Alert": {
+        "iconAriaLabels": {
+          "info": "Info",
+          "success": "Erfolg",
+          "warning": "Warnung",
+          "error": "Fehler"
+        }
+      },
       "Nav": {
         "navAriaLabel": "Hauptnavigation",
         "links": {

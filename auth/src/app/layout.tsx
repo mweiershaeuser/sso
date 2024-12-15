@@ -3,9 +3,10 @@ import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { MuseoModerno, Open_Sans } from "next/font/google";
-import { Toaster } from "react-hot-toast";
+import Alerts from "./_components/alerts";
 import Footer from "./_components/footer";
 import Header from "./_components/header";
+import LoginLogoutDialogs from "./_components/login-logout-dialogs";
 import StoreProvider from "./_contexts/store-provider";
 import "./globals.css";
 
@@ -54,36 +55,6 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <StoreProvider>
             <SkipLink label={t("skipToMainContentLink")} href="#main-content" />
-            <Toaster
-              position="top-center"
-              toastOptions={{
-                duration: 5000,
-                style: {
-                  color: "oklch(var(--ac))",
-                  background: "oklch(var(--a))",
-                },
-                success: {
-                  style: {
-                    color: "oklch(var(--suc))",
-                    background: "oklch(var(--su))",
-                  },
-                  iconTheme: {
-                    primary: "oklch(var(--suc))",
-                    secondary: "oklch(var(--su))",
-                  },
-                },
-                error: {
-                  style: {
-                    color: "oklch(var(--erc))",
-                    background: "oklch(var(--er))",
-                  },
-                  iconTheme: {
-                    primary: "oklch(var(--erc))",
-                    secondary: "oklch(var(--er))",
-                  },
-                },
-              }}
-            />
             <div className="w-full p-4">
               <Header />
             </div>
@@ -91,6 +62,8 @@ export default async function RootLayout({
               id="main-content"
               className="grow flex flex-col min-w-full max-w-full prose prose-headings:font-display"
             >
+              <LoginLogoutDialogs />
+              <Alerts />
               {children}
             </main>
             <div className="w-full p-4">

@@ -34,7 +34,7 @@ export default function Dialog({
   return (
     <dialog
       ref={dialogRef}
-      className="min-w-[150px] p-5 rounded-lg border-2 border-primary focus-visible:outline outline-2 outline-offset-2 outline-primary open:flex flex-col prose prose-headings:font-display"
+      className="m-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[150px] p-5 rounded-lg border-2 border-primary focus-visible:outline outline-2 outline-offset-2 outline-primary open:flex flex-col prose prose-headings:font-display"
     >
       <div className="flex justify-between mb-3">
         <button
