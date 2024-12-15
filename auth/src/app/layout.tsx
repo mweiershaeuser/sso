@@ -6,6 +6,7 @@ import { MuseoModerno, Open_Sans } from "next/font/google";
 import Alerts from "./_components/alerts";
 import Footer from "./_components/footer";
 import Header from "./_components/header";
+import LoginLogoutDialogs from "./_components/login-logout-dialogs";
 import StoreProvider from "./_contexts/store-provider";
 import "./globals.css";
 
@@ -61,6 +62,7 @@ export default async function RootLayout({
               id="main-content"
               className="grow flex flex-col min-w-full max-w-full prose prose-headings:font-display"
             >
+              <LoginLogoutDialogs />
               <Alerts />
               {children}
             </main>

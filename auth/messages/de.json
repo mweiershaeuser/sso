@@ -15,6 +15,10 @@
     },
     "Footer": {
       "authorProfileLinkTitle": "Zum GitHub-Profil"
+    },
+    "LoginLogoutDialogs": {
+      "loginDialogMessage": "Anmeldung erfolgreich!",
+      "logoutDialogMessage": "Abmeldung erfolgreich!"
     }
   },
   "Home": {

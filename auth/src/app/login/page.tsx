@@ -1,4 +1,5 @@
 import { getAuthState } from "@/auth/server-operations";
+import { loginSuccessfulSearchParamKey } from "@/constants";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
@@ -19,7 +20,7 @@ export default async function Login() {
   const t = await getTranslations("Login");
 
   if (authStateResponse.data?.loggedIn) {
-    redirect("/account");
+    redirect(`/account?${loginSuccessfulSearchParamKey}=true`);
   }
 
   return (
