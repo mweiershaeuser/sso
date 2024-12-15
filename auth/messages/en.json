@@ -43,7 +43,6 @@
         "description": "Accessible Single Sign-On with Passkey-Support"
       },
       "h1": "Imprint",
-      "langInfoIconAriaLabel": "Info",
       "langInfoMessage": "At the moment, the following text is unfortunately only available in German."
     },
     "Sitemap": {
@@ -192,6 +191,14 @@
   },
   "components": {
     "common": {
+      "Alert": {
+        "iconAriaLabels": {
+          "info": "Info",
+          "success": "Success",
+          "warning": "Warning",
+          "error": "Error"
+        }
+      },
       "Nav": {
         "navAriaLabel": "Main Navigation",
         "links": {

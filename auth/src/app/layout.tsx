@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { MuseoModerno, Open_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import Alerts from "./_components/alerts";
 import Footer from "./_components/footer";
 import Header from "./_components/header";
 import StoreProvider from "./_contexts/store-provider";
@@ -91,6 +92,7 @@ export default async function RootLayout({
               id="main-content"
               className="grow flex flex-col min-w-full max-w-full prose prose-headings:font-display"
             >
+              <Alerts />
               {children}
             </main>
             <div className="w-full p-4">

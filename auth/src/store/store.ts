@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import alertReducer from "./alert/alertSlice";
 import authReducer from "./auth/authSlice";
 import userReducer from "./user/userSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
+      alert: alertReducer,
       auth: authReducer,
       user: userReducer,
     },

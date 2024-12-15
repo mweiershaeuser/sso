@@ -2,18 +2,29 @@
 
 import { PrimaryAuthFactor } from "@/auth/models/auth-factors";
 import { webauthnRegistrationFlow } from "@/auth/webauthn";
+import {
+  addAlert,
+  removeAlert,
+  selectAlertWithId,
+} from "@/store/alert/alertSlice";
 import { selectAuth } from "@/store/auth/authSlice";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
-import toast from "react-hot-toast";
+import { useCallback, useEffect } from "react";
+
+export const webAuthnRegistrationErrorAlertId = "ERR_WEBAUTHN_REGISTRATION";
 
 export default function PasswordlessAuthSettings() {
   const t = useTranslations("Account.PasswordlessAuthSettings");
   const t_global = useTranslations();
 
   const router = useRouter();
+
+  const errorAlert = useAppSelector(
+    selectAlertWithId(webAuthnRegistrationErrorAlertId),
+  );
+  const dispatch = useAppDispatch();
 
   const { availableAuthFactors } = useAppSelector(selectAuth);
 
@@ -24,15 +35,30 @@ export default function PasswordlessAuthSettings() {
       messageT: webauthnErrorT,
     } = await webauthnRegistrationFlow();
     if (webauthnSuccess === "error") {
-      toast.error(
-        webauthnErrorT
-          ? t_global(webauthnErrorT)
-          : (webauthnError ?? t_global("global.errorMessages.generic")),
+      const errorMessage = webauthnErrorT
+        ? t_global(webauthnErrorT)
+        : (webauthnError ?? t_global("global.errorMessages.generic"));
+      dispatch(
+        addAlert({
+          id: webAuthnRegistrationErrorAlertId,
+          type: "error",
+          role: "alert",
+          content: errorMessage,
+        }),
       );
     } else {
+      if (errorAlert) {
+        dispatch(removeAlert(webAuthnRegistrationErrorAlertId));
+      }
       router.refresh();
     }
-  }, [router, t_global]);
+  }, [dispatch, errorAlert, router, t_global]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(removeAlert(webAuthnRegistrationErrorAlertId));
+    };
+  }, []);
 
   return (
     <>

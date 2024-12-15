@@ -1,3 +1,4 @@
+import Alert from "@/components/common/alert";
 import { Locale } from "@/i18n/models/locale";
 import { Metadata } from "next";
 import { useLocale, useTranslations } from "next-intl";
@@ -27,14 +28,9 @@ export default function Imprint() {
         </a>
       </p>
       {(locale as Locale) !== "de" && (
-        <div className="alert alert-info">
-          <i
-            className="bi bi-info-circle-fill"
-            aria-label={t("langInfoIconAriaLabel")}
-            role="img"
-          ></i>
+        <Alert type="info">
           <span>{t("langInfoMessage")}</span>
-        </div>
+        </Alert>
       )}
       <div lang="de">
         <h2>Disclaimer - rechtliche Hinweise</h2>
