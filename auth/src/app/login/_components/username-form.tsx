@@ -1,12 +1,24 @@
 import { createSession } from "@/auth/server-actions";
 import { TextInput } from "@/components/form/text-input";
+import {
+  addAlert,
+  removeAlert,
+  selectAlertWithId,
+} from "@/store/alert/alertSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { useFormState } from "react-dom";
-import toast from "react-hot-toast";
+
+const usernameFormErrorAlertId = "ERR_USERNAME_FORM";
 
 export default function UsernameForm() {
   const t = useTranslations("Login.LoginForm.UsernameForm");
+
+  const errorAlert = useAppSelector(
+    selectAlertWithId(usernameFormErrorAlertId),
+  );
+  const dispatch = useAppDispatch();
 
   const [state, formAction] = useFormState(createSession, undefined);
   const userRef = useRef<HTMLInputElement>(null);
@@ -16,9 +28,24 @@ export default function UsernameForm() {
       userRef.current?.focus();
     }
     if (state?.type === "error" && state?.message) {
-      toast.error(state.message);
+      dispatch(
+        addAlert({
+          id: usernameFormErrorAlertId,
+          type: "error",
+          role: "alert",
+          content: state.message,
+        }),
+      );
+    } else if (errorAlert) {
+      dispatch(removeAlert(usernameFormErrorAlertId));
     }
-  }, [state]);
+  }, [dispatch, state]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(removeAlert(usernameFormErrorAlertId));
+    };
+  }, []);
 
   return (
     <form action={formAction} className="flex flex-col">

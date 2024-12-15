@@ -16,8 +16,8 @@ import { setUser } from "@/store/user/userSlice";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 
-export const loadAuthStateErrorAlertId = "ERR_LOAD_AUTH_STATE";
-export const loadUserStateErrorAlertId = "ERR_LOAD_USER_STATE";
+const loadAuthStateErrorAlertId = "ERR_LOAD_AUTH_STATE";
+const loadUserStateErrorAlertId = "ERR_LOAD_USER_STATE";
 
 export default function AuthActions({
   authStateResponse,

@@ -2,14 +2,19 @@
 
 import { authenticateWithPassword } from "@/auth/server-actions";
 import { TextInput } from "@/components/form/text-input";
-import { removeAlert, selectAlertWithId } from "@/store/alert/alertSlice";
+import {
+  addAlert,
+  removeAlert,
+  selectAlertWithId,
+} from "@/store/alert/alertSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { selectUser } from "@/store/user/userSlice";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { useFormState } from "react-dom";
-import toast from "react-hot-toast";
 import { webAuthnLoginErrorAlertId } from "./webauthn-form";
+
+const passwordFormErrorAlertId = "ERR_PASSWORD_FORM";
 
 export default function PasswordForm() {
   const t = useTranslations("Login.LoginForm.AuthFactorsForm.PasswordForm");
@@ -17,6 +22,9 @@ export default function PasswordForm() {
   const { username } = useAppSelector(selectUser);
   const webAuthnLoginErrorAlert = useAppSelector(
     selectAlertWithId(webAuthnLoginErrorAlertId),
+  );
+  const errorAlert = useAppSelector(
+    selectAlertWithId(passwordFormErrorAlertId),
   );
   const dispatch = useAppDispatch();
 
@@ -32,9 +40,24 @@ export default function PasswordForm() {
       passwordRef.current?.focus();
     }
     if (state?.type === "error" && state?.message) {
-      toast.error(state.message);
+      dispatch(
+        addAlert({
+          id: passwordFormErrorAlertId,
+          type: "error",
+          role: "alert",
+          content: state.message,
+        }),
+      );
+    } else if (errorAlert) {
+      dispatch(removeAlert(passwordFormErrorAlertId));
     }
   }, [dispatch, state]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(removeAlert(passwordFormErrorAlertId));
+    };
+  }, []);
 
   return (
     <form action={formAction} className="flex flex-col">

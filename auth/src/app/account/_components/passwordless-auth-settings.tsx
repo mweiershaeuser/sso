@@ -13,7 +13,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
 
-export const webAuthnRegistrationErrorAlertId = "ERR_WEBAUTHN_REGISTRATION";
+const webAuthnRegistrationErrorAlertId = "ERR_WEBAUTHN_REGISTRATION";
 
 export default function PasswordlessAuthSettings() {
   const t = useTranslations("Account.PasswordlessAuthSettings");
