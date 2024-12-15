@@ -77,7 +77,7 @@ export function TextInput({
             className={`${!description ? "mt-1" : "mt-0"} mb-2 px-1 text-sm text-error`}
           >
             <i
-              className="bi bi-exclamation-circle-fill"
+              className="bi bi-x-circle-fill"
               aria-label={`${t("errorMessageIconAriaLabel")}: `}
               role="img"
             ></i>{" "}
