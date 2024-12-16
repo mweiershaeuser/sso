@@ -32,6 +32,13 @@
       "action": "Zur Startseite"
     }
   },
+  "Error": {
+    "card": {
+      "title": "Fehler!",
+      "description": "Ein unerwarteteter Fehler ist aufgetreten.",
+      "action": "Erneut versuchen"
+    }
+  },
   "Home": {
     "metadata": {
       "title": "Start - mw auth",

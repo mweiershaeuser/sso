@@ -32,6 +32,13 @@
       "action": "Go to home"
     }
   },
+  "Error": {
+    "card": {
+      "title": "Error!",
+      "description": "An unexpected error occured.",
+      "action": "Try again"
+    }
+  },
   "Home": {
     "metadata": {
       "title": "Home - mw auth",
