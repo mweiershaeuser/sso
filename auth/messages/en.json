@@ -21,6 +21,17 @@
       "logoutDialogMessage": "Logout successful!"
     }
   },
+  "NotFound": {
+    "metadata": {
+      "title": "Page not found! - mw auth",
+      "description": "Accessible Single Sign-On with Passkey-Support"
+    },
+    "card": {
+      "title": "Page not found!",
+      "description": "The requested page could unfortunately not be found.",
+      "action": "Go to home"
+    }
+  },
   "Home": {
     "metadata": {
       "title": "Home - mw auth",
