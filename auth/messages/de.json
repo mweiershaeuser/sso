@@ -21,6 +21,24 @@
       "logoutDialogMessage": "Abmeldung erfolgreich!"
     }
   },
+  "NotFound": {
+    "metadata": {
+      "title": "Seite nicht gefunden! - mw auth",
+      "description": "Barrierefreier Single Sign-On mit Passkey-Unterstützung"
+    },
+    "card": {
+      "title": "Seite nicht gefunden!",
+      "description": "Die angefragte Seite konnte leider nicht gefunden werden.",
+      "action": "Zur Startseite"
+    }
+  },
+  "Error": {
+    "card": {
+      "title": "Fehler!",
+      "description": "Ein unerwarteteter Fehler ist aufgetreten.",
+      "action": "Erneut versuchen"
+    }
+  },
   "Home": {
     "metadata": {
       "title": "Start - mw auth",
