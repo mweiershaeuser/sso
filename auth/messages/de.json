@@ -67,6 +67,14 @@
       "h1": "Impressum",
       "langInfoMessage": "Der folgende Text ist im Moment leider nur in deutscher Sprache verfügbar."
     },
+    "Privacy": {
+      "metadata": {
+        "title": "Datenschutz - mw auth",
+        "description": "Barrierefreier Single Sign-On mit Passkey-Unterstützung"
+      },
+      "h1": "Datenschutz",
+      "langInfoMessage": "Der folgende Text ist im Moment leider nur in deutscher Sprache verfügbar."
+    },
     "Sitemap": {
       "metadata": {
         "title": "Sitemap - mw auth",
@@ -78,6 +86,7 @@
         "login": "Anmeldung (leitet zum Konto weiter, wenn angemeldet)",
         "account": "Konto (leitet zur Anmeldung weiter, wenn nicht angemeldet)",
         "imprint": "Impressum",
+        "privacy": "Datenschutz",
         "sitemap": "Sitemap"
       }
     }
@@ -233,6 +242,7 @@
         "navAriaLabel": "Footer-Navigation",
         "links": {
           "imprint": "Impressum",
+          "privacy": "Datenschutz",
           "sitemap": "Sitemap"
         }
       },
