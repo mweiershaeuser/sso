@@ -67,6 +67,14 @@
       "h1": "Imprint",
       "langInfoMessage": "At the moment, the following text is unfortunately only available in German."
     },
+    "Privacy": {
+      "metadata": {
+        "title": "Privacy - mw auth",
+        "description": "Accessible Single Sign-On with Passkey-Support"
+      },
+      "h1": "Privacy",
+      "langInfoMessage": "At the moment, the following text is unfortunately only available in German."
+    },
     "Sitemap": {
       "metadata": {
         "title": "Sitemap - mw auth",
@@ -78,6 +86,7 @@
         "login": "Login (redirects to Account, if logged in)",
         "account": "Account (redirects to Login, if not logged in)",
         "imprint": "Imprint",
+        "privacy": "Privacy",
         "sitemap": "Sitemap"
       }
     }
@@ -233,6 +242,7 @@
         "navAriaLabel": "Footer Navigation",
         "links": {
           "imprint": "Imprint",
+          "privacy": "Privacy",
           "sitemap": "Sitemap"
         }
       },

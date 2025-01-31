@@ -13,6 +13,9 @@ export default function FooterNav() {
           <NavLink path={"/imprint"} label={t("links.imprint")}></NavLink>
         </li>
         <li>
+          <NavLink path={"/privacy"} label={t("links.privacy")}></NavLink>
+        </li>
+        <li>
           <NavLink path={"/sitemap"} label={t("links.sitemap")}></NavLink>
         </li>
       </ul>

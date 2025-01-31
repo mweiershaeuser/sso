@@ -32,6 +32,9 @@ export default function Sitemap() {
           <Link href={"/imprint"}>{t("links.imprint")}</Link>
         </li>
         <li>
+          <Link href={"/privacy"}>{t("links.privacy")}</Link>
+        </li>
+        <li>
           <Link href={"/sitemap"}>{t("links.sitemap")}</Link>
         </li>
       </ul>
