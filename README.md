@@ -2,7 +2,7 @@
 
 This project aims at creating an accessible Single Sign-On (SSO) with support for Multi-Factor-Authentication (MFA) and Passkeys. It has been created in the context of my master's thesis for demonstration and evaluation of the development of accessible authentication means, specifically comparing MFA authentication with Passkeys in this regard.
 
-The SSO is based on [Zitadel](https://github.com/zitadel/zitadel) and introduces a Custom Login UI, implemented with Next.js.
+The application is based on [Zitadel](https://github.com/zitadel/zitadel) and introduces a Custom Login UI, implemented with Next.js.
 
 ## Features and Status
 
@@ -10,6 +10,7 @@ The SSO is based on [Zitadel](https://github.com/zitadel/zitadel) and introduces
   - Language Support
     - Deutsch ✅
     - English ✅
+  - OpenID Connect (OIDC) Support ❌
 - Registration ❌
 - Authentication
   - Password ✅
